@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Core;
+using Kompas;
 
 namespace KompasPlugin
 {
@@ -19,11 +20,15 @@ namespace KompasPlugin
         }
 
         private void button1_Click(object sender, MouseEventArgs e)
-		{
-
-			MessageBox.Show("Введено неверное значение длины болта, нужные значения: от 10 до 20 мм\n" +
-			                "Введено неверное значение диаметра резьбы, нужные значения: от 4 до 7 мм", "Ошибка",
-				MessageBoxButtons.OK, MessageBoxIcon.Error);
+        {
+	        _detailParameters.InnerRingDiameter = 5;
+	        _detailParameters.OuterRingDiameter = 7;
+	        _detailParameters.ThreadDiameter = 4;
+	        _detailParameters.BoltHeight = 10;
+	        _detailParameters.HeadDiameter = 10;
+	        _detailParameters.BoltHeadHeight = 2;
+	        var builder = new DetailBuilder(_detailParameters);
+            builder.Build();
         }
 
 		private void textBox1_Enter(object sender, EventArgs e)
