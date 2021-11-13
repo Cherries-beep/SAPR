@@ -24,7 +24,7 @@ namespace Core
 		/// <summary>
 		/// Длина болта
 		/// </summary>
-		private double _boltHeight = double.NaN;
+		private double _bolBodytHeight = double.NaN;
 
 		/// <summary>
 		/// Диаметр шляпки болта
@@ -63,14 +63,14 @@ namespace Core
 		/// <summary>
 		/// Возвращает и задает значение длины болта
 		/// </summary>
-		public double BoltHeight
+		public double BolBodytHeight
 		{
-			get => _boltHeight;
+			get => _bolBodytHeight;
 			set
 			{
 				const double minValue = 10.0;
 				const double maxValue = 20.0;
-				SetValue(ref _boltHeight, value, minValue, maxValue);
+				SetValue(ref _bolBodytHeight, value, minValue, maxValue);
 			}
 		}
 

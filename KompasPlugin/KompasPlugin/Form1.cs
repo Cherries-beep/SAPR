@@ -23,8 +23,8 @@ namespace KompasPlugin
         {
 	        _detailParameters.InnerRingDiameter = 5;
 	        _detailParameters.OuterRingDiameter = 7;
-	        _detailParameters.ThreadDiameter = 4;
-	        _detailParameters.BoltHeight = 10;
+	        _detailParameters.ThreadDiameter = 4.7;
+	        _detailParameters.BolBodytHeight = 10;
 	        _detailParameters.HeadDiameter = 10;
 	        _detailParameters.BoltHeadHeight = 2;
 	        var builder = new DetailBuilder(_detailParameters);
