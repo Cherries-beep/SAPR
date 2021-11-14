@@ -213,7 +213,7 @@ namespace TestCore
 		{
 			var detailParameters = DetailParameters;
 
-			var value = 4.0;
+			var value = 5.9;
 			var innerRingDiameterValue = 6.0;
 			detailParameters.InnerRingDiameter = innerRingDiameterValue;
 
@@ -375,5 +375,90 @@ namespace TestCore
 				"Присвоилось значение не входящий в диапазон");
 		}
 
+		[Test(Description = "Проверка корректного присвоения минимальных значений")]
+		public void TestSetMinValue_CorrectSet()
+		{
+			var detailParameters = DetailParameters;
+
+			Assert.DoesNotThrow(() => detailParameters.SetMinValue(),
+				"Не удалось присвоить установить минимальные значения");
+		}
+
+		[Test(Description = "Проверка корректного присвоения значения свойству BoltBodyHeight через метод SetValue")]
+		public void TestSetValue_CorrectSetBoltBodyHeight()
+		{
+			var detailParameters = DetailParameters;
+
+			var value = 10.0;
+
+			Assert.DoesNotThrow(() => detailParameters.SetValue(Parameters.BoltBodyHeight, value),
+				"Не удалось присвоить корректное значение");
+		}
+
+		[Test(Description = "Проверка корректного присвоения значения свойству HeadDiameter через метод SetValue")]
+		public void TestSetValue_CorrectSetHeadDiameter()
+		{
+			var detailParameters = DetailParameters;
+
+			var value = 10.0;
+
+			Assert.DoesNotThrow(() => detailParameters.SetValue(Parameters.HeadDiameter, value),
+				"Не удалось присвоить корректное значение");
+		}
+
+		[Test(Description = "Проверка корректного присвоения значения свойству BoltHeadHeight через метод SetValue")]
+		public void TestSetValue_CorrectSetBoltHeadHeight()
+		{
+			var detailParameters = DetailParameters;
+
+			var value = 2.0;
+
+			Assert.DoesNotThrow(() => detailParameters.SetValue(Parameters.BoltHeadHeight, value),
+				"Не удалось присвоить корректное значение");
+		}
+
+		[Test(Description = "Проверка корректного присвоения значения свойству InnerRingDiameter через метод SetValue")]
+		public void TestSetValue_CorrectSetInnerRingDiameter()
+		{
+			var detailParameters = DetailParameters;
+
+			var value = 4.0;
+
+			Assert.DoesNotThrow(() => detailParameters.SetValue(Parameters.InnerRingDiameter, value),
+				"Не удалось присвоить корректное значение");
+		}
+
+		[Test(Description = "Проверка корректного присвоения значения свойству OuterRingDiameter через метод SetValue")]
+		public void TestSetValue_CorrectSetOuterRingDiameter()
+		{
+			var detailParameters = DetailParameters;
+
+			var value = 5.0;
+
+			Assert.DoesNotThrow(() => detailParameters.SetValue(Parameters.OuterRingDiameter, value),
+				"Не удалось присвоить корректное значение");
+		}
+
+		[Test(Description = "Проверка корректного присвоения значения свойству ThreadDiameter через метод SetValue")]
+		public void TestSetValue_CorrectSetThreadDiameter()
+		{
+			var detailParameters = DetailParameters;
+
+			var value = 3.0;
+
+			Assert.DoesNotThrow(() => detailParameters.SetValue(Parameters.ThreadDiameter, value),
+				"Не удалось присвоить корректное значение");
+		}
+
+		[Test(Description = "Проверка присвоения значения неизвестному элементу перечисления")]
+		public void TestSetValue_UnkownEnumerate()
+		{
+			var detailParameters = DetailParameters;
+
+			var value = 3.0;
+
+			Assert.Throws<ArgumentOutOfRangeException>(() => detailParameters.SetValue((Parameters)15, value),
+				"Нашелся такой элемент перечисления!");
+		}
 	}
 }

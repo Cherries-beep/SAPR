@@ -90,9 +90,12 @@ namespace Kompas
 			var x = _detailParameters.InnerRingDiameter / 2;
 			var y = 0;
 			var delta = _detailParameters.InnerRingDiameter - _detailParameters.ThreadDiameter;
-			iDocument2D.ksLineSeg(x, y, x - delta, y -  delta, 1);
-			iDocument2D.ksLineSeg(x - delta, y - delta, x - delta, y + delta, 1);
-			iDocument2D.ksLineSeg(x - delta, y + delta, x, y, 1);
+			var point1 = new Point(x, y);
+			var point2 = new Point(x - delta, y - delta);
+			var point3 = new Point(x - delta, y + delta);
+			iDocument2D.ksLineSeg(point1.X, point1.Y, point2.X, point2.Y, 1);
+			iDocument2D.ksLineSeg(point2.X, point2.Y, point3.X, point3.Y, 1);
+			iDocument2D.ksLineSeg(point3.X, point3.Y, point1.X, point1.Y, 1);
 			iDefinitionSketch.EndEdit();
 
 			ksEntity conicSpiral =
@@ -101,7 +104,7 @@ namespace Kompas
 				(ksCylindricSpiralDefinition)conicSpiral.GetDefinition();
 			iCylindricSpiralDefinition.diamType = 0;
 			iCylindricSpiralDefinition.buildDir = true;
-			iCylindricSpiralDefinition.diam = _detailParameters.ThreadDiameter;
+			iCylindricSpiralDefinition.diam = _detailParameters.ThreadDiameter * 0.5;
 			iCylindricSpiralDefinition.buildMode = 2;
 			iCylindricSpiralDefinition.turn = 20;
 			iCylindricSpiralDefinition.height = _detailParameters.BoltBodytHeight;

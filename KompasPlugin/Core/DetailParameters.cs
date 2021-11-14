@@ -96,7 +96,7 @@ namespace Core
 			get => _innerRingDiameter;
 			set
 			{
-				const double minValue = 4.0;
+				const double minValue = 4;
 				var maxValue = 7.0;
 				if (!double.IsNaN(OuterRingDiameter))
 				{
@@ -134,15 +134,89 @@ namespace Core
 			get => _threadDiameter;
 			set
 			{
-				const double minValue = 4.0;
+				var minValue = 3.0;
 				var maxValue = 7.0;
 				if (!double.IsNaN(InnerRingDiameter))
 				{
 					maxValue = InnerRingDiameter - Accuracy;
+					minValue = InnerRingDiameter - 3 * Accuracy;
 				}
 
 				SetValue(ref _threadDiameter, value, minValue, maxValue);
 			}
+		}
+
+		/// <summary>
+		/// Событие изменения зависемых параметров
+		/// </summary>
+		public event EventHandler DependencyParameterChanged;
+		
+		/// <summary>
+		/// Событие установления параметров в стандартное значение
+		/// </summary>
+		public event EventHandler DefaultParameter;
+
+		/// <summary>
+		/// Установить значение определенному параметру
+		/// </summary>
+		/// <param name="parameter">Параметр</param>
+		/// <param name="value">Значение</param>
+		public void SetValue(Parameters parameter, double value)
+		{
+			switch (parameter)
+			{
+				case Parameters.BoltBodyHeight:
+				{
+					BoltBodytHeight = value;
+					break;
+				}
+				case Parameters.InnerRingDiameter:
+				{
+					InnerRingDiameter = value;
+					DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
+					break;
+				}
+				case Parameters.OuterRingDiameter:
+				{
+					OuterRingDiameter = value; 
+					DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
+					break;
+				}
+				case Parameters.ThreadDiameter:
+				{
+					ThreadDiameter = value;
+					DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
+					break;
+				}
+				case Parameters.HeadDiameter:
+				{
+					HeadDiameter = value;
+					break;
+				}
+				case Parameters.BoltHeadHeight:
+				{
+					BoltHeadHeight = value;
+					break;
+				}
+				default:
+				{
+					throw new ArgumentOutOfRangeException(nameof(parameter), parameter, null);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Установить минимальные значения
+		/// </summary>
+		public void SetMinValue()
+		{
+			BoltHeadHeight = 2;
+			InnerRingDiameter = 4;
+			ThreadDiameter = 3.7;
+			OuterRingDiameter = 5;
+			BoltBodytHeight = 10;
+			HeadDiameter = 10;
+			DefaultParameter?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>

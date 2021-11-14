@@ -21,5 +21,27 @@ namespace Core
 				throw new ArgumentException($"Значение не входит в диапазон. Диапазон {minValue} — {maxValue}");
 			}
 		}
+
+
+		/// <summary>
+		/// Получить из строки число типа <see cref="double"/>
+		/// </summary>
+		/// <param name="valueString">Строка для парса</param>
+		/// <returns>Число типа <see cref="double"/></returns>
+		public static double GetValueFromString(string valueString)
+		{
+			if (string.IsNullOrEmpty(valueString))
+			{
+				throw new ArgumentException("Строка не должна быть пуста.");
+			}
+
+			if (!double.TryParse(valueString, out var value))
+			{
+				throw new ArgumentException("Введено некорректное значение." +
+				                            " Нужно ввести либо целое число, либо число с плавающей точкой");
+			}
+
+			return value;
+		}
 	}
 }

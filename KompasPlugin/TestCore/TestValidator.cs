@@ -64,5 +64,36 @@ namespace TestCore
 			Assert.Throws<ArgumentException>(() => Validator.Validate(value, MinValue, MaxValue),
 				$"Значение не должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
+
+		[Test(Description = "Проверка правильного считывания значения из строки")]
+		public void TestGetValueFromString_CorrectValue()
+		{
+			const string value = "10.0";
+
+			var expected = 10.0;
+
+			var actual = double.NaN;
+
+			Assert.DoesNotThrow(() => actual = Validator.GetValueFromString(value),
+				"Значение не спарсилось");
+
+			Assert.AreEqual(expected, actual, "При парсе получилось не то значение");
+		}
+
+		[Test(Description = "Проверка парса пустой строки")]
+		public void TestGetValueFromString_EmptyString()
+		{
+			Assert.Throws<ArgumentException>(() => Validator.GetValueFromString(string.Empty),
+				"Запарсилось пустая строка");
+		}
+
+		[Test(Description = "Проверка парса неправильной строки")]
+		public void TestGetValueFromString_WrongString()
+		{
+			var value = "qwewq123qw";
+
+			Assert.Throws<ArgumentException>(() => Validator.GetValueFromString(value),
+				"Запарсилось неправильная строка");
+		}
 	}
 }
