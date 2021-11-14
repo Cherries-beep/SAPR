@@ -67,7 +67,7 @@ namespace Kompas
 			extrudeDefinition.directionType = (int)Direction_Type.dtNormal;
 			extrudeDefinition.SetSketch(sketch);
 			ksExtrusionParam extrudeParam = extrudeDefinition.ExtrusionParam();
-			extrudeParam.depthNormal = _detailParameters.BolBodytHeight;
+			extrudeParam.depthNormal = _detailParameters.BoltBodytHeight;
 			extrude.Create();
 
 			CreateThread(part, plane);
@@ -104,7 +104,7 @@ namespace Kompas
 			iCylindricSpiralDefinition.diam = _detailParameters.ThreadDiameter;
 			iCylindricSpiralDefinition.buildMode = 2;
 			iCylindricSpiralDefinition.turn = 20;
-			iCylindricSpiralDefinition.height = _detailParameters.BolBodytHeight;
+			iCylindricSpiralDefinition.height = _detailParameters.BoltBodytHeight;
 			iCylindricSpiralDefinition.SetPlane(plane);
 			conicSpiral.SetAdvancedColor(0);
 			conicSpiral.hidden = true;
@@ -130,7 +130,7 @@ namespace Kompas
 			ksEntity plane = part.NewEntity((int)Obj3dType.o3d_planeOffset);
 			ksPlaneOffsetDefinition planeOffsetDefinition = plane.GetDefinition();
 			planeOffsetDefinition.direction = true;
-			planeOffsetDefinition.offset = _detailParameters.BolBodytHeight;
+			planeOffsetDefinition.offset = _detailParameters.BoltBodytHeight;
 			planeOffsetDefinition.SetPlane(planeXoy);
 			plane.Create();
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
@@ -156,13 +156,17 @@ namespace Kompas
 			CreateHeadHole(part);
 		}
 
+		/// <summary>
+		/// Создает отверстие для отвертки
+		/// </summary>
+		/// <param name="part"></param>
 		private void CreateHeadHole(ksPart part)
 		{
 			ksEntity planeXoy = part.GetDefaultEntity((int)Obj3dType.o3d_planeXOY);
 			ksEntity plane = part.NewEntity((int)Obj3dType.o3d_planeOffset);
 			ksPlaneOffsetDefinition planeOffsetDefinition = plane.GetDefinition();
 			planeOffsetDefinition.direction = true;
-			planeOffsetDefinition.offset = _detailParameters.BolBodytHeight + _detailParameters.BoltHeadHeight;
+			planeOffsetDefinition.offset = _detailParameters.BoltBodytHeight + _detailParameters.BoltHeadHeight;
 			planeOffsetDefinition.SetPlane(planeXoy);
 			plane.Create();
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
@@ -202,6 +206,11 @@ namespace Kompas
 			cutExtrusion.Create();
 		}
 
+		/// <summary>
+		/// Закругляет шапку болта
+		/// </summary>
+		/// <param name="part"></param>
+		/// <param name="head"></param>
 		private void CreateHeadRounding(ksPart part, ksEntity head)
 		{
 			ksEntity plane = part.GetDefaultEntity((int)Obj3dType.o3d_planeXOZ);
@@ -213,9 +222,9 @@ namespace Kompas
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = sketchDefinition.BeginEdit();
 			var x = _detailParameters.HeadDiameter / 2;
-			var y = -_detailParameters.BolBodytHeight;
+			var y = -_detailParameters.BoltBodytHeight;
 			var deltaY = -_detailParameters.BoltHeadHeight;
-			var deltaX = _detailParameters.InnerRingDiameter / 2;
+			var deltaX = _detailParameters.OuterRingDiameter / 2;
 			var indexLine = document2D.ksLineSeg(x, y, x, y + deltaY, 1);
 			document2D.ksLineSeg(x, y + deltaY, deltaX, y + deltaY, 1);
 			document2D.ksArcBy3Points(x, y, x - 0.1 * x, y + deltaY / 2, deltaX, y + deltaY, 1);
