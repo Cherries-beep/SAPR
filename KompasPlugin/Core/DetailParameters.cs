@@ -24,7 +24,7 @@ namespace Core
 		/// <summary>
 		/// Длина болта
 		/// </summary>
-		private double _boltBodytHeight = double.NaN;
+		private double _boltBodyHeight = double.NaN;
 
 		/// <summary>
 		/// Диаметр шляпки болта
@@ -63,14 +63,14 @@ namespace Core
 		/// <summary>
 		/// Возвращает и задает значение длины болта
 		/// </summary>
-		public double BoltBodytHeight
+		public double BoltBodyHeight
 		{
-			get => _boltBodytHeight;
+			get => _boltBodyHeight;
 			set
 			{
 				const double minValue = 10.0;
 				const double maxValue = 20.0;
-				SetValue(ref _boltBodytHeight, value, minValue, maxValue);
+				SetValue(ref _boltBodyHeight, value, minValue, maxValue);
 			}
 		}
 
@@ -167,7 +167,7 @@ namespace Core
 			{
 				case Parameters.BoltBodyHeight:
 				{
-					BoltBodytHeight = value;
+					BoltBodyHeight = value;
 					break;
 				}
 				case Parameters.InnerRingDiameter:
@@ -214,7 +214,7 @@ namespace Core
 			InnerRingDiameter = 4;
 			ThreadDiameter = 3.7;
 			OuterRingDiameter = 5;
-			BoltBodytHeight = 10;
+			BoltBodyHeight = 10;
 			HeadDiameter = 10;
 			DefaultParameter?.Invoke(this, EventArgs.Empty);
 		}

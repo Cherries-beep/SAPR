@@ -288,9 +288,9 @@ namespace TestCore
 
 			var expected = 10.0;
 
-			detailParameters.BoltBodytHeight = expected;
+			detailParameters.BoltBodyHeight = expected;
 
-			var actual = detailParameters.BoltBodytHeight;
+			var actual = detailParameters.BoltBodyHeight;
 
 			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
 		}
@@ -302,7 +302,7 @@ namespace TestCore
 
 			var value = 10.0;
 
-			Assert.DoesNotThrow(() => detailParameters.BoltBodytHeight = value,
+			Assert.DoesNotThrow(() => detailParameters.BoltBodyHeight = value,
 				"Не удалось присвоить корректное значение");
 		}
 
@@ -313,7 +313,7 @@ namespace TestCore
 
 			var value = 1.0;
 
-			Assert.Throws<ArgumentException>(() => detailParameters.BoltBodytHeight = value,
+			Assert.Throws<ArgumentException>(() => detailParameters.BoltBodyHeight = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 
@@ -324,7 +324,7 @@ namespace TestCore
 
 			var value = 100.0;
 
-			Assert.Throws<ArgumentException>(() => detailParameters.BoltBodytHeight = value,
+			Assert.Throws<ArgumentException>(() => detailParameters.BoltBodyHeight = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 

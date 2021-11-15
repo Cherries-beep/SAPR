@@ -42,7 +42,7 @@ namespace KompasPlugin
 		/// <param name="e"></param>
 		private void OnDefaultParameter(object sender, EventArgs e)
 		{
-			BodyHeightTextBox.Text = _detailParameters.BoltBodytHeight.ToString();
+			BodyHeightTextBox.Text = _detailParameters.BoltBodyHeight.ToString();
 			InnerRingDiameterTextBox.Text = _detailParameters.InnerRingDiameter.ToString();
 			OuterRingDiameterTextBox.Text = _detailParameters.OuterRingDiameter.ToString();
 			ThreadDiameterTextBox.Text = _detailParameters.ThreadDiameter.ToString();
