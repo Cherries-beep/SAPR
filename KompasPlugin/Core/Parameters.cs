@@ -1,5 +1,6 @@
 ﻿namespace Core
 {
+	//TODO: XML
 	public enum Parameters
 	{
 		BoltBodyHeight,

@@ -191,6 +191,7 @@ namespace Kompas
 			var deltaX = _detailParameters.OuterRingDiameter / 2;
 			document2D.ksLineSeg(x, y, x, y + deltaY, 1);
 			document2D.ksLineSeg(x, y + deltaY, deltaX, y + deltaY, 1);
+			//TODO: rsdn
 			document2D.ksArcBy3Points(x, y, x - 0.1 * x, y + deltaY / 2, deltaX, y + deltaY, 1);
 			sketchDefinition.EndEdit();
 
@@ -251,12 +252,13 @@ namespace Kompas
 			return plane;
 		}
 
-		/// <summary>
-		/// Получить эскиз относительно плоскости XOZ
-		/// </summary>
-		/// <param name="part"></param>
-		/// <returns></returns>
-		private ksEntity GetPlaneXozSketch(ksPart part, out ksSketchDefinition sketchDefinition)
+        /// <summary>
+        /// Получить эскиз относительно плоскости XOZ
+        /// </summary>
+        /// <param name="part"></param>
+        /// <param name="sketchDefinition"></param>
+        /// <returns></returns>
+        private ksEntity GetPlaneXozSketch(ksPart part, out ksSketchDefinition sketchDefinition)
 		{
 			ksEntity plane = part.GetDefaultEntity((int)Obj3dType.o3d_planeXOZ);
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);

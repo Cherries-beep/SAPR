@@ -77,6 +77,7 @@ namespace KompasPlugin
 		/// <returns></returns>
 		private string GetNameLabel(Parameters parameter)
 		{
+			//TODO: не нужна переменная
 			var labelText = string.Empty;
 			switch (parameter)
 			{
@@ -174,6 +175,7 @@ namespace KompasPlugin
             builder.Build();
         }
 
+		//TODO: дубли сократить
         private void BodyHeightTextBox_TextChanged(object sender, EventArgs e)
 		{
 			SetValueParameter(BodyHeightTextBox, BodyHeightErrorToolTip,

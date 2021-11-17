@@ -15,6 +15,7 @@ namespace TestCore
 		/// </summary>
 		private DetailParameters DetailParameters => new DetailParameters();
 
+		//TODO: Убрать дублирование тестов через TestCase-s
 		[Test(Description = "Проверка корректного возврата у свойства InnerRingDiameter")]
 		public void TestInnerRingDiameter_CorrectGetInnerRingDiameter()
 		{
