@@ -189,6 +189,7 @@ namespace KompasPlugin
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
+		//TODO: дубли сократить
 		private void AnyTextBox_TextChanged(object sender, EventArgs e)
 		{
 			if (!(sender is TextBox textBox))

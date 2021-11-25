@@ -16,7 +16,7 @@ namespace TestCore
 		private DetailParameters DetailParameters => new DetailParameters();
 
 		//TODO: Убрать дублирование тестов через TestCase-s
-		[Test(Description = "Проверка корректного возврата у свойства InnerRingDiameter")]
+		[TestCase(TestName = "Проверка корректного возврата у свойства InnerRingDiameter")]
 		public void TestInnerRingDiameter_CorrectGetInnerRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -30,7 +30,7 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству InnerRingDiameter")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству InnerRingDiameter")]
 		public void TestInnerRingDiameter_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -41,29 +41,18 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения меньше минимального свойству InnerRingDiameter")]
-		public void TestInnerRingDiameter_ThrowExceptionSetBelowMin()
+		[TestCase(1.0, TestName = "Проверка присвоения значения меньше минимального свойству InnerRingDiameter")]
+		[TestCase(100.0, TestName = "Проверка присвоения значения больше максимального свойству InnerRingDiameter")]
+		public void TestInnerRingDiameter_ThrowExceptionSet(double value)
 		{
 			var detailParameters = DetailParameters;
-
-			var value = 1.0;
 
 			Assert.Throws<ArgumentException>(() => detailParameters.InnerRingDiameter = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка присвоения значения больше максимального свойству InnerRingDiameter")]
-		public void TestInnerRingDiameter_ThrowExceptionSetAboveMin()
-		{
-			var detailParameters = DetailParameters;
-
-			var value = 100.0;
-
-			Assert.Throws<ArgumentException>(() => detailParameters.InnerRingDiameter = value,
-				"Присвоилось значение не входящий в диапазон");
-		}
-
-		[Test(Description = "Проверка корректного присвоения значения свойству InnerRingDiameter при установленном значении OuterRingDiameter")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству InnerRingDiameter" +
+		                     " при установленном значении OuterRingDiameter")]
 		public void TestInnerRingDiameter_CorrectSetWithOuterRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -76,7 +65,8 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения свойству InnerRingDiameter большему или такому же, как при установленном значении OuterRingDiameter")]
+		[TestCase(TestName = "Проверка присвоения значения свойству InnerRingDiameter большему или такому же," +
+		                     " как при установленном значении OuterRingDiameter")]
 		public void TestInnerRingDiameter_ThrowExceptionSetWithOuterRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -89,7 +79,7 @@ namespace TestCore
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка корректного возврата у свойства OuterRingDiameter")]
+		[TestCase(TestName = "Проверка корректного возврата у свойства OuterRingDiameter")]
 		public void TestOuterRingDiameter_CorrectGet()
 		{
 			var detailParameters = DetailParameters;
@@ -103,7 +93,7 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству OuterRingDiameter")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству OuterRingDiameter")]
 		public void TestOuterRingDiameter_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -114,29 +104,18 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения меньше минимального свойству OuterRingDiameter")]
-		public void TestOuterRingDiameter_ThrowExceptionSetBelowMin()
+		[TestCase(1.0, TestName = "Проверка присвоения значения меньше минимального свойству OuterRingDiameter")]
+		[TestCase(100.0, TestName = "Проверка присвоения значения больше максимального свойству OuterRingDiameter")]
+		public void TestOuterRingDiameter_ThrowExceptionSet(double value)
 		{
 			var detailParameters = DetailParameters;
-
-			var value = 1.0;
 
 			Assert.Throws<ArgumentException>(() => detailParameters.OuterRingDiameter = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка присвоения значения больше максимального свойству OuterRingDiameter")]
-		public void TestOuterRingDiameter_ThrowExceptionSetAboveMin()
-		{
-			var detailParameters = DetailParameters;
-
-			var value = 100.0;
-
-			Assert.Throws<ArgumentException>(() => detailParameters.OuterRingDiameter = value,
-				"Присвоилось значение не входящий в диапазон");
-		}
-
-		[Test(Description = "Проверка корректного присвоения значения свойству OuterRingDiameter при установленном значении InnerRingDiameter")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству OuterRingDiameter" +
+		                     " при установленном значении InnerRingDiameter")]
 		public void TestOuterRingDiameter_CorrectSetWithInnerRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -149,7 +128,8 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения свойству OuterRingDiameter меньше или такому же, как при установленном значении InnerRingDiameter")]
+		[TestCase(TestName = "Проверка присвоения значения свойству OuterRingDiameter" +
+		                     " меньше или такому же, как при установленном значении InnerRingDiameter")]
 		public void TestOuterRingDiameter_ThrowExceptionSetWithInnerRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -162,7 +142,7 @@ namespace TestCore
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка корректного возврата у свойства ThreadDiameter")]
+		[TestCase(TestName = "Проверка корректного возврата у свойства ThreadDiameter")]
 		public void TestThreadDiameter_CorrectGet()
 		{
 			var detailParameters = DetailParameters;
@@ -176,7 +156,7 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству ThreadDiameter")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству ThreadDiameter")]
 		public void TestThreadDiameter_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -187,29 +167,18 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения меньше минимального свойству ThreadDiameter")]
-		public void TestThreadDiameter_ThrowExceptionSetBelowMin()
+		[TestCase(1.0, TestName = "Проверка присвоения значения меньше минимального свойству ThreadDiameter")]
+		[TestCase(100.0, TestName = "Проверка присвоения значения больше максимального свойству ThreadDiameter")]
+		public void TestThreadDiameter_ThrowExceptionSet(double value)
 		{
 			var detailParameters = DetailParameters;
-
-			var value = 1.0;
 
 			Assert.Throws<ArgumentException>(() => detailParameters.ThreadDiameter = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка присвоения значения больше максимального свойству ThreadDiameter")]
-		public void TestThreadDiameter_ThrowExceptionSetAboveMin()
-		{
-			var detailParameters = DetailParameters;
-
-			var value = 100.0;
-
-			Assert.Throws<ArgumentException>(() => detailParameters.ThreadDiameter = value,
-				"Присвоилось значение не входящий в диапазон");
-		}
-
-		[Test(Description = "Проверка корректного присвоения значения свойству OuterRingDiameter при установленном значении InnerRingDiameter")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству OuterRingDiameter" +
+		                     " при установленном значении InnerRingDiameter")]
 		public void TestThreadDiameter_CorrectSetWithInnerRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -222,7 +191,8 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения свойству ThreadDiameter меньшему или такому же, как при установленном значении InnerRingDiameter")]
+		[TestCase(TestName = "Проверка присвоения значения свойству ThreadDiameter меньшему " +
+		                     "или такому же, как при установленном значении InnerRingDiameter")]
 		public void TestThreadDiameter_ThrowExceptionSetWithInnerRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -235,7 +205,7 @@ namespace TestCore
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка корректного возврата у свойства BoltHeadHeight")]
+		[TestCase(TestName = "Проверка корректного возврата у свойства BoltHeadHeight")]
 		public void TestBoltHeadHeight_CorrectGet()
 		{
 			var detailParameters = DetailParameters;
@@ -249,7 +219,7 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству BoltHeadHeight")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству BoltHeadHeight")]
 		public void TestBoltHeadHeight_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -260,29 +230,17 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения меньше минимального свойству BoltHeadHeight")]
-		public void TestBoltHeadHeight_ThrowExceptionSet()
+		[TestCase(1.0, TestName = "Проверка присвоения значения меньше минимального свойству BoltHeadHeight")]
+		[TestCase(100.0, TestName = "Проверка присвоения значения больше максимального свойству BoltHeadHeight")]
+		public void TestBoltHeadHeight_ThrowExceptionSet(double value)
 		{
 			var detailParameters = DetailParameters;
-
-			var value = 1.0;
 
 			Assert.Throws<ArgumentException>(() => detailParameters.BoltHeadHeight = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка присвоения значения больше максимального свойству BoltHeadHeight")]
-		public void TestBoltHeadHeight_ThrowExceptionSetAboveMin()
-		{
-			var detailParameters = DetailParameters;
-
-			var value = 100.0;
-
-			Assert.Throws<ArgumentException>(() => detailParameters.BoltHeadHeight = value,
-				"Присвоилось значение не входящий в диапазон");
-		}
-
-		[Test(Description = "Проверка корректного возврата у свойства BoltHeight")]
+		[TestCase(TestName = "Проверка корректного возврата у свойства BoltHeight")]
 		public void TestBoltHeight_CorrectGet()
 		{
 			var detailParameters = DetailParameters;
@@ -296,7 +254,7 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству BoltHeight")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству BoltHeight")]
 		public void TestBoltHeight_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -307,29 +265,17 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения меньше минимального свойству BoltHeight")]
-		public void TestBoltHeight_ThrowExceptionSetBelowMin()
+		[TestCase(1.0, TestName = "Проверка присвоения значения меньше минимального свойству BoltHeight")]
+		[TestCase(100.0, TestName = "Проверка присвоения значения больше максимального свойству BoltHeight")]
+		public void TestBoltHeight_ThrowExceptionSet(double value)
 		{
 			var detailParameters = DetailParameters;
-
-			var value = 1.0;
 
 			Assert.Throws<ArgumentException>(() => detailParameters.BoltBodyHeight = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка присвоения значения больше максимального свойству BoltHeight")]
-		public void TestBoltHeight_ThrowExceptionSetAboveMin()
-		{
-			var detailParameters = DetailParameters;
-
-			var value = 100.0;
-
-			Assert.Throws<ArgumentException>(() => detailParameters.BoltBodyHeight = value,
-				"Присвоилось значение не входящий в диапазон");
-		}
-
-		[Test(Description = "Проверка корректного возврата у свойства HeadDiameter")]
+		[TestCase(TestName = "Проверка корректного возврата у свойства HeadDiameter")]
 		public void TestHeadDiameter_CorrectGet()
 		{
 			var detailParameters = DetailParameters;
@@ -343,7 +289,7 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству HeadDiameter")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству HeadDiameter")]
 		public void TestHeadDiameter_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -354,29 +300,17 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения меньше минимального свойству HeadDiameter")]
-		public void TestHeadDiameter_ThrowExceptionSetBelowMin()
+		[TestCase(1.0, TestName = "Проверка присвоения значения меньше минимального свойству HeadDiameter")]
+		[TestCase(100.0, TestName = "Проверка присвоения значения больше максимального свойству HeadDiameter")]
+		public void TestHeadDiameter_ThrowExceptionSet(double value)
 		{
 			var detailParameters = DetailParameters;
-
-			var value = 1.0;
 
 			Assert.Throws<ArgumentException>(() => detailParameters.HeadDiameter = value,
 				"Присвоилось значение не входящий в диапазон");
 		}
 
-		[Test(Description = "Проверка присвоения значения больше максимального свойству HeadDiameter")]
-		public void TestHeadDiameter_ThrowExceptionSetAboveMin()
-		{
-			var detailParameters = DetailParameters;
-
-			var value = 100.0;
-
-			Assert.Throws<ArgumentException>(() => detailParameters.HeadDiameter = value,
-				"Присвоилось значение не входящий в диапазон");
-		}
-
-		[Test(Description = "Проверка корректного присвоения минимальных значений")]
+		[TestCase(TestName = "Проверка корректного присвоения минимальных значений")]
 		public void TestSetMinValue_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -385,7 +319,7 @@ namespace TestCore
 				"Не удалось присвоить установить минимальные значения");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству BoltBodyHeight через метод SetValue")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству BoltBodyHeight через метод SetValue")]
 		public void TestSetValue_CorrectSetBoltBodyHeight()
 		{
 			var detailParameters = DetailParameters;
@@ -396,7 +330,7 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству HeadDiameter через метод SetValue")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству HeadDiameter через метод SetValue")]
 		public void TestSetValue_CorrectSetHeadDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -407,7 +341,7 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству BoltHeadHeight через метод SetValue")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству BoltHeadHeight через метод SetValue")]
 		public void TestSetValue_CorrectSetBoltHeadHeight()
 		{
 			var detailParameters = DetailParameters;
@@ -418,7 +352,7 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству InnerRingDiameter через метод SetValue")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству InnerRingDiameter через метод SetValue")]
 		public void TestSetValue_CorrectSetInnerRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -429,7 +363,7 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству OuterRingDiameter через метод SetValue")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству OuterRingDiameter через метод SetValue")]
 		public void TestSetValue_CorrectSetOuterRingDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -440,7 +374,7 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка корректного присвоения значения свойству ThreadDiameter через метод SetValue")]
+		[TestCase(TestName = "Проверка корректного присвоения значения свойству ThreadDiameter через метод SetValue")]
 		public void TestSetValue_CorrectSetThreadDiameter()
 		{
 			var detailParameters = DetailParameters;
@@ -451,7 +385,7 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[Test(Description = "Проверка присвоения значения неизвестному элементу перечисления")]
+		[TestCase(TestName = "Проверка присвоения значения неизвестному элементу перечисления")]
 		public void TestSetValue_UnkownEnumerate()
 		{
 			var detailParameters = DetailParameters;
@@ -460,6 +394,34 @@ namespace TestCore
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => detailParameters.SetValue((Parameters)15, value),
 				"Нашелся такой элемент перечисления!");
+		}
+
+		[TestCase(TestName = "Проверка работы DependencyParameterChanged")]
+		public void TestDependencyParameterChanged_InvokeCorrect()
+		{
+			var detailParameters = DetailParameters;
+
+			var flag = false;
+
+			detailParameters.DependencyParameterChanged += (sender, args) => flag = true;
+
+			detailParameters.SetValue(Parameters.OuterRingDiameter, 5.0);
+
+			Assert.IsTrue(flag, $"Не сработало событие {nameof(detailParameters.DependencyParameterChanged)}");
+		}
+
+		[TestCase(TestName = "Проверка работы DefaultParameter")]
+		public void TestDefaultParameter_InvokeCorrect()
+		{
+			var detailParameters = DetailParameters;
+
+			var flag = false;
+
+			detailParameters.DefaultParameter += (sender, args) => flag = true;
+
+			detailParameters.SetMinValue();
+
+			Assert.IsTrue(flag, $"Не сработало событие {nameof(detailParameters.DefaultParameter)}");
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace TestCore
 		/// </summary>
 		private const double MaxValue = 15.0;
 
-		[Test(Description = "Проверка отправки корректного значения, входящего в диапазон")]
+		[TestCase(TestName = "Проверка отправки корректного значения, входящего в диапазон")]
 		public void TestValidate_CorrectValue()
 		{
 			const double value = 10.0;
@@ -29,7 +29,7 @@ namespace TestCore
 				$"Значение должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
 
-		[Test(Description = "Проверка отправки корректного значения, равному минимальному значению")]
+		[TestCase(TestName = "Проверка отправки корректного значения, равному минимальному значению")]
 		public void TestValidate_CorrectValueEqualMinValue()
 		{
 			const double value = MinValue;
@@ -38,7 +38,7 @@ namespace TestCore
 				$"Значение должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
 
-		[Test(Description = "Проверка отправки корректного значения, равному максимальному значению")]
+		[TestCase(TestName = "Проверка отправки корректного значения, равному максимальному значению")]
 		public void TestValidate_CorrectValueEqualMaxValue()
 		{
 			const double value = MaxValue;
@@ -47,7 +47,7 @@ namespace TestCore
 				$"Значение должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
 
-		[Test(Description = "Проверка отправки значения меньшего минимального")]
+		[TestCase(TestName = "Проверка отправки значения меньшего минимального")]
 		public void TestValidate_BelowMinValue()
 		{
 			const double value = 3.0;
@@ -56,7 +56,7 @@ namespace TestCore
 				$"Значение не должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
 
-		[Test(Description = "Проверка отправки значения больше максимального")]
+		[TestCase(TestName = "Проверка отправки значения больше максимального")]
 		public void TestValidate_AboveMaxValue()
 		{
 			const double value = 20.0;
@@ -65,7 +65,7 @@ namespace TestCore
 				$"Значение не должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
 
-		[Test(Description = "Проверка правильного считывания значения из строки")]
+		[TestCase(TestName = "Проверка правильного считывания значения из строки")]
 		public void TestGetValueFromString_CorrectValue()
 		{
 			const string value = "10.0";
@@ -80,14 +80,14 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "При парсе получилось не то значение");
 		}
 
-		[Test(Description = "Проверка парса пустой строки")]
+		[TestCase(TestName = "Проверка парса пустой строки")]
 		public void TestGetValueFromString_EmptyString()
 		{
 			Assert.Throws<ArgumentException>(() => Validator.GetValueFromString(string.Empty),
 				"Запарсилось пустая строка");
 		}
 
-		[Test(Description = "Проверка парса неправильной строки")]
+		[TestCase(TestName = "Проверка парса неправильной строки")]
 		public void TestGetValueFromString_WrongString()
 		{
 			var value = "qwewq123qw";
