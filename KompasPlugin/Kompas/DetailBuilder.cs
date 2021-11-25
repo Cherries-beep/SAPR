@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core;
 using Kompas6API5;
 using Kompas6Constants3D;
@@ -146,18 +147,24 @@ namespace Kompas
 			var x = radius;
 			var y = 0.0;
 			var angle = 60 * Math.PI / 180;
-			var point1 = new Point(x, y);
-			var point2 = new Point(radius * Math.Cos(angle), radius * Math.Sin(angle));
-			var point3 = new Point(radius * Math.Cos(2 * angle), radius * Math.Sin(2 * angle));
-			var point4 = new Point(radius * Math.Cos(3 * angle), radius * Math.Sin(3 * angle));
-			var point5 = new Point(radius * Math.Cos(4 * angle), radius * Math.Sin(4 * angle));
-			var point6 = new Point(radius * Math.Cos(5 * angle), radius * Math.Sin(5 * angle));
-			document2D.ksLineSeg(point1.X, point1.Y, point2.X, point2.Y, 1);
-			document2D.ksLineSeg(point2.X, point2.Y, point3.X, point3.Y, 1);
-			document2D.ksLineSeg(point3.X, point3.Y, point4.X, point4.Y, 1);
-			document2D.ksLineSeg(point4.X, point4.Y, point5.X, point5.Y, 1);
-			document2D.ksLineSeg(point5.X, point5.Y, point6.X, point6.Y, 1);
-			document2D.ksLineSeg(point6.X, point6.Y, point1.X, point1.Y, 1);
+			var points = new List<Point>();
+			points.Add(new Point(x, y));
+			for (var i = 1; i <= 5; i++)
+			{
+				points.Add(new Point(radius * Math.Cos(i * angle), radius * Math.Sin(i * angle)));
+			}
+
+			for (var i = 0; i < points.Count; i++)
+			{
+				var nextIndex = i + 1;
+				if (i == points.Count - 1)
+				{
+					nextIndex = 0;
+				}
+
+				document2D.ksLineSeg(points[i].X, points[i].Y, points[nextIndex].X, points[nextIndex].Y, 1);
+			}
+
 			sketchDefinition.EndEdit();
 
 			// Выдавливание с вырезом

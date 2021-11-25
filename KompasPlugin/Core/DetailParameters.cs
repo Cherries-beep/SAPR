@@ -17,6 +17,11 @@ namespace Core
 		private const double Accuracy = 0.1;
 
 		/// <summary>
+		/// Словарь для присвоения значений свойствам
+		/// </summary>
+		private readonly Dictionary<Parameters, Action<double>> _actions;
+
+		/// <summary>
 		/// Высота шляпки болта
 		/// </summary>
 		private double _boltHeadHeight = double.NaN;
@@ -162,6 +167,37 @@ namespace Core
 		/// </summary>
 		public event EventHandler DefaultParameter;
 
+		public DetailParameters()
+		{
+			_actions = new Dictionary<Parameters, Action<double>>
+			{
+				{ Parameters.BoltBodyHeight, value => BoltBodyHeight = value },
+				{ Parameters.BoltHeadHeight, value => BoltHeadHeight = value },
+				{ Parameters.HeadDiameter, value => HeadDiameter = value },
+				{
+					Parameters.OuterRingDiameter, value =>
+					{
+						OuterRingDiameter = value;
+						DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
+					}
+				},
+				{
+					Parameters.InnerRingDiameter, value =>
+					{
+						InnerRingDiameter = value;
+						DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
+					}
+				},
+				{
+					Parameters.ThreadDiameter, value =>
+					{
+						ThreadDiameter = value;
+						DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
+					}
+				}
+			};
+		}
+
 		/// <summary>
 		/// Установить значение определенному параметру
 		/// </summary>
@@ -169,46 +205,7 @@ namespace Core
 		/// <param name="value">Значение</param>
 		public void SetValue(Parameters parameter, double value)
 		{
-			switch (parameter)
-			{
-				case Parameters.BoltBodyHeight:
-				{
-					BoltBodyHeight = value;
-					break;
-				}
-				case Parameters.InnerRingDiameter:
-				{
-					InnerRingDiameter = value;
-					DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
-					break;
-				}
-				case Parameters.OuterRingDiameter:
-				{
-					OuterRingDiameter = value; 
-					DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
-					break;
-				}
-				case Parameters.ThreadDiameter:
-				{
-					ThreadDiameter = value;
-					DependencyParameterChanged?.Invoke(this, EventArgs.Empty);
-					break;
-				}
-				case Parameters.HeadDiameter:
-				{
-					HeadDiameter = value;
-					break;
-				}
-				case Parameters.BoltHeadHeight:
-				{
-					BoltHeadHeight = value;
-					break;
-				}
-				default:
-				{
-					throw new ArgumentOutOfRangeException(nameof(parameter), parameter, null);
-				}
-			}
+			_actions[parameter](value);
 		}
 
 		/// <summary>
