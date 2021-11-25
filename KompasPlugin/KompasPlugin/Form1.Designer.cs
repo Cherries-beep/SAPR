@@ -32,30 +32,25 @@ namespace KompasPlugin
 			this.components = new System.ComponentModel.Container();
 			this.BuilderButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.HeadHeightTextBox = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.BodyHeightTextBox = new System.Windows.Forms.TextBox();
+			this.BoltHeadHeightTextBox = new System.Windows.Forms.TextBox();
+			this.BoltBodyHeightLabel = new System.Windows.Forms.Label();
+			this.BoltHeadHeightLabel = new System.Windows.Forms.Label();
+			this.BoltBodyHeightTextBox = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
+			this.InnerRingDiameterLabel = new System.Windows.Forms.Label();
+			this.OuterRingDiameterLabel = new System.Windows.Forms.Label();
+			this.ThreadDiameterLabel = new System.Windows.Forms.Label();
+			this.HeadDiameterLabel = new System.Windows.Forms.Label();
 			this.InnerRingDiameterTextBox = new System.Windows.Forms.TextBox();
 			this.OuterRingDiameterTextBox = new System.Windows.Forms.TextBox();
 			this.ThreadDiameterTextBox = new System.Windows.Forms.TextBox();
 			this.HeadDiameterTextBox = new System.Windows.Forms.TextBox();
-			this.BodyHeightErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.InnerRingDiameterErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.OuterRingDiameterErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.ThreadDiameterErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.HeadDiameterErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.HeadHeightErrorToolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -78,20 +73,20 @@ namespace KompasPlugin
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-			this.tableLayoutPanel1.Controls.Add(this.HeadHeightTextBox, 1, 5);
-			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.label6, 0, 5);
-			this.tableLayoutPanel1.Controls.Add(this.BodyHeightTextBox, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.BoltHeadHeightTextBox, 1, 5);
+			this.tableLayoutPanel1.Controls.Add(this.BoltBodyHeightLabel, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.BoltHeadHeightLabel, 0, 5);
+			this.tableLayoutPanel1.Controls.Add(this.BoltBodyHeightTextBox, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label7, 2, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label8, 2, 1);
 			this.tableLayoutPanel1.Controls.Add(this.label9, 2, 2);
 			this.tableLayoutPanel1.Controls.Add(this.label10, 2, 3);
 			this.tableLayoutPanel1.Controls.Add(this.label11, 2, 4);
 			this.tableLayoutPanel1.Controls.Add(this.label12, 2, 5);
-			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
-			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 4);
+			this.tableLayoutPanel1.Controls.Add(this.InnerRingDiameterLabel, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.OuterRingDiameterLabel, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.ThreadDiameterLabel, 0, 3);
+			this.tableLayoutPanel1.Controls.Add(this.HeadDiameterLabel, 0, 4);
 			this.tableLayoutPanel1.Controls.Add(this.InnerRingDiameterTextBox, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.OuterRingDiameterTextBox, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.ThreadDiameterTextBox, 1, 3);
@@ -108,44 +103,46 @@ namespace KompasPlugin
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(266, 276);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
-			// HeadHeightTextBox
+			// BoltHeadHeightTextBox
 			// 
-			this.HeadHeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.HeadHeightTextBox.Location = new System.Drawing.Point(173, 240);
-			this.HeadHeightTextBox.Name = "HeadHeightTextBox";
-			this.HeadHeightTextBox.Size = new System.Drawing.Size(56, 20);
-			this.HeadHeightTextBox.TabIndex = 6;
-			this.HeadHeightTextBox.TextChanged += new System.EventHandler(this.HeadHeightTextBox_TextChanged);
+			this.BoltHeadHeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.BoltHeadHeightTextBox.Location = new System.Drawing.Point(173, 240);
+			this.BoltHeadHeightTextBox.Name = "BoltHeadHeightTextBox";
+			this.BoltHeadHeightTextBox.Size = new System.Drawing.Size(56, 20);
+			this.BoltHeadHeightTextBox.TabIndex = 6;
+			this.BoltHeadHeightTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_TextChanged);
+			this.BoltHeadHeightTextBox.Enter += new System.EventHandler(this.AnyTextBox_Enter);
 			// 
-			// label1
+			// BoltBodyHeightLabel
 			// 
-			this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 16);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(75, 13);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Длина болта:";
+			this.BoltBodyHeightLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.BoltBodyHeightLabel.AutoSize = true;
+			this.BoltBodyHeightLabel.Location = new System.Drawing.Point(3, 16);
+			this.BoltBodyHeightLabel.Name = "BoltBodyHeightLabel";
+			this.BoltBodyHeightLabel.Size = new System.Drawing.Size(75, 13);
+			this.BoltBodyHeightLabel.TabIndex = 0;
+			this.BoltBodyHeightLabel.Text = "Длина болта:";
 			// 
-			// label6
+			// BoltHeadHeightLabel
 			// 
-			this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(3, 244);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(121, 13);
-			this.label6.TabIndex = 5;
-			this.label6.Text = "Высота шляпки болта:";
+			this.BoltHeadHeightLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.BoltHeadHeightLabel.AutoSize = true;
+			this.BoltHeadHeightLabel.Location = new System.Drawing.Point(3, 244);
+			this.BoltHeadHeightLabel.Name = "BoltHeadHeightLabel";
+			this.BoltHeadHeightLabel.Size = new System.Drawing.Size(121, 13);
+			this.BoltHeadHeightLabel.TabIndex = 5;
+			this.BoltHeadHeightLabel.Text = "Высота шляпки болта:";
 			// 
-			// BodyHeightTextBox
+			// BoltBodyHeightTextBox
 			// 
-			this.BodyHeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.BodyHeightTextBox.BackColor = System.Drawing.Color.White;
-			this.BodyHeightTextBox.Location = new System.Drawing.Point(173, 12);
-			this.BodyHeightTextBox.Name = "BodyHeightTextBox";
-			this.BodyHeightTextBox.Size = new System.Drawing.Size(56, 20);
-			this.BodyHeightTextBox.TabIndex = 1;
-			this.BodyHeightTextBox.TextChanged += new System.EventHandler(this.BodyHeightTextBox_TextChanged);
+			this.BoltBodyHeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.BoltBodyHeightTextBox.BackColor = System.Drawing.Color.White;
+			this.BoltBodyHeightTextBox.Location = new System.Drawing.Point(173, 12);
+			this.BoltBodyHeightTextBox.Name = "BoltBodyHeightTextBox";
+			this.BoltBodyHeightTextBox.Size = new System.Drawing.Size(56, 20);
+			this.BoltBodyHeightTextBox.TabIndex = 1;
+			this.BoltBodyHeightTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_TextChanged);
+			this.BoltBodyHeightTextBox.Enter += new System.EventHandler(this.AnyTextBox_Enter);
 			// 
 			// label7
 			// 
@@ -207,45 +204,45 @@ namespace KompasPlugin
 			this.label12.TabIndex = 17;
 			this.label12.Text = "мм";
 			// 
-			// label3
+			// InnerRingDiameterLabel
 			// 
-			this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(3, 61);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(161, 13);
-			this.label3.TabIndex = 2;
-			this.label3.Text = "Диаметр внутреннего кольца:";
+			this.InnerRingDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.InnerRingDiameterLabel.AutoSize = true;
+			this.InnerRingDiameterLabel.Location = new System.Drawing.Point(3, 61);
+			this.InnerRingDiameterLabel.Name = "InnerRingDiameterLabel";
+			this.InnerRingDiameterLabel.Size = new System.Drawing.Size(161, 13);
+			this.InnerRingDiameterLabel.TabIndex = 2;
+			this.InnerRingDiameterLabel.Text = "Диаметр внутреннего кольца:";
 			// 
-			// label5
+			// OuterRingDiameterLabel
 			// 
-			this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(3, 106);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(147, 13);
-			this.label5.TabIndex = 4;
-			this.label5.Text = "Диаметр внешнего кольца:";
+			this.OuterRingDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.OuterRingDiameterLabel.AutoSize = true;
+			this.OuterRingDiameterLabel.Location = new System.Drawing.Point(3, 106);
+			this.OuterRingDiameterLabel.Name = "OuterRingDiameterLabel";
+			this.OuterRingDiameterLabel.Size = new System.Drawing.Size(147, 13);
+			this.OuterRingDiameterLabel.TabIndex = 4;
+			this.OuterRingDiameterLabel.Text = "Диаметр внешнего кольца:";
 			// 
-			// label4
+			// ThreadDiameterLabel
 			// 
-			this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(3, 151);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(97, 13);
-			this.label4.TabIndex = 3;
-			this.label4.Text = "Диаметр резьбы:";
+			this.ThreadDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.ThreadDiameterLabel.AutoSize = true;
+			this.ThreadDiameterLabel.Location = new System.Drawing.Point(3, 151);
+			this.ThreadDiameterLabel.Name = "ThreadDiameterLabel";
+			this.ThreadDiameterLabel.Size = new System.Drawing.Size(97, 13);
+			this.ThreadDiameterLabel.TabIndex = 3;
+			this.ThreadDiameterLabel.Text = "Диаметр резьбы:";
 			// 
-			// label2
+			// HeadDiameterLabel
 			// 
-			this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(3, 196);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(129, 13);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Диаметр шляпки болта:";
+			this.HeadDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.HeadDiameterLabel.AutoSize = true;
+			this.HeadDiameterLabel.Location = new System.Drawing.Point(3, 196);
+			this.HeadDiameterLabel.Name = "HeadDiameterLabel";
+			this.HeadDiameterLabel.Size = new System.Drawing.Size(129, 13);
+			this.HeadDiameterLabel.TabIndex = 1;
+			this.HeadDiameterLabel.Text = "Диаметр шляпки болта:";
 			// 
 			// InnerRingDiameterTextBox
 			// 
@@ -254,7 +251,8 @@ namespace KompasPlugin
 			this.InnerRingDiameterTextBox.Name = "InnerRingDiameterTextBox";
 			this.InnerRingDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.InnerRingDiameterTextBox.TabIndex = 2;
-			this.InnerRingDiameterTextBox.TextChanged += new System.EventHandler(this.InnerRingDiameterTextBox_TextChanged);
+			this.InnerRingDiameterTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_TextChanged);
+			this.InnerRingDiameterTextBox.Enter += new System.EventHandler(this.AnyTextBox_Enter);
 			// 
 			// OuterRingDiameterTextBox
 			// 
@@ -263,7 +261,8 @@ namespace KompasPlugin
 			this.OuterRingDiameterTextBox.Name = "OuterRingDiameterTextBox";
 			this.OuterRingDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.OuterRingDiameterTextBox.TabIndex = 3;
-			this.OuterRingDiameterTextBox.TextChanged += new System.EventHandler(this.OuterRingDiameterTextBox_TextChanged);
+			this.OuterRingDiameterTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_TextChanged);
+			this.OuterRingDiameterTextBox.Enter += new System.EventHandler(this.AnyTextBox_Enter);
 			// 
 			// ThreadDiameterTextBox
 			// 
@@ -272,7 +271,8 @@ namespace KompasPlugin
 			this.ThreadDiameterTextBox.Name = "ThreadDiameterTextBox";
 			this.ThreadDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.ThreadDiameterTextBox.TabIndex = 4;
-			this.ThreadDiameterTextBox.TextChanged += new System.EventHandler(this.ThreadDiameterTextBox_TextChanged);
+			this.ThreadDiameterTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_TextChanged);
+			this.ThreadDiameterTextBox.Enter += new System.EventHandler(this.AnyTextBox_Enter);
 			// 
 			// HeadDiameterTextBox
 			// 
@@ -281,7 +281,8 @@ namespace KompasPlugin
 			this.HeadDiameterTextBox.Name = "HeadDiameterTextBox";
 			this.HeadDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.HeadDiameterTextBox.TabIndex = 5;
-			this.HeadDiameterTextBox.TextChanged += new System.EventHandler(this.HeadDiameterTextBox_TextChanged);
+			this.HeadDiameterTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_TextChanged);
+			this.HeadDiameterTextBox.Enter += new System.EventHandler(this.AnyTextBox_Enter);
 			// 
 			// Form1
 			// 
@@ -304,30 +305,25 @@ namespace KompasPlugin
 
         private System.Windows.Forms.Button BuilderButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox HeadHeightTextBox;
+        private System.Windows.Forms.TextBox BoltHeadHeightTextBox;
         private System.Windows.Forms.TextBox OuterRingDiameterTextBox;
         private System.Windows.Forms.TextBox ThreadDiameterTextBox;
         private System.Windows.Forms.TextBox InnerRingDiameterTextBox;
         private System.Windows.Forms.TextBox HeadDiameterTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox BodyHeightTextBox;
+        private System.Windows.Forms.Label BoltBodyHeightLabel;
+        private System.Windows.Forms.Label HeadDiameterLabel;
+        private System.Windows.Forms.Label InnerRingDiameterLabel;
+        private System.Windows.Forms.Label ThreadDiameterLabel;
+        private System.Windows.Forms.Label OuterRingDiameterLabel;
+        private System.Windows.Forms.Label BoltHeadHeightLabel;
+        private System.Windows.Forms.TextBox BoltBodyHeightTextBox;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.ToolTip BodyHeightErrorToolTip;
-		private System.Windows.Forms.ToolTip InnerRingDiameterErrorToolTip;
-		private System.Windows.Forms.ToolTip OuterRingDiameterErrorToolTip;
-		private System.Windows.Forms.ToolTip ThreadDiameterErrorToolTip;
-		private System.Windows.Forms.ToolTip HeadDiameterErrorToolTip;
-		private System.Windows.Forms.ToolTip HeadHeightErrorToolTip;
+		private System.Windows.Forms.ToolTip ToolTip;
 	}
 }
 

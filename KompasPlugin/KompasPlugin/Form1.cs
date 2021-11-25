@@ -21,10 +21,23 @@ namespace KompasPlugin
         private readonly Dictionary<Parameters, string> _errors = new Dictionary<Parameters, string>();
 
 		/// <summary>
+		/// Словарь <see cref="Label"/>
+		/// </summary>
+		private readonly Dictionary<Parameters, Label> _labels;
+
+		/// <summary>
+		/// Список всех <see cref="System.Windows.Forms.ToolTip"/>
+		/// </summary>
+		private readonly List<ToolTip> _toolTips;
+
+		/// <summary>
 		/// Флаг отвечающий за проверку зависимостей
 		/// </summary>
 		private bool _isCheckDependencies;
 
+		/// <summary>
+		/// Конструктор формы
+		/// </summary>
 		public Form1()
         {
             InitializeComponent();
@@ -33,6 +46,16 @@ namespace KompasPlugin
             _detailParameters.DependencyParameterChanged += OnDependencyParameterChanged;
             _detailParameters.DefaultParameter += OnDefaultParameter;
 			_detailParameters.SetMinValue();
+
+			_labels = new Dictionary<Parameters, Label>
+			{
+				{ Parameters.BoltBodyHeight, BoltBodyHeightLabel },
+				{ Parameters.BoltHeadHeight, BoltHeadHeightLabel },
+				{ Parameters.HeadDiameter, HeadDiameterLabel },
+				{ Parameters.InnerRingDiameter, InnerRingDiameterLabel },
+				{ Parameters.OuterRingDiameter, OuterRingDiameterLabel },
+				{ Parameters.ThreadDiameter, ThreadDiameterLabel },
+			};
         }
 
 		/// <summary>
@@ -42,12 +65,12 @@ namespace KompasPlugin
 		/// <param name="e"></param>
 		private void OnDefaultParameter(object sender, EventArgs e)
 		{
-			BodyHeightTextBox.Text = _detailParameters.BoltBodyHeight.ToString();
+			BoltBodyHeightTextBox.Text = _detailParameters.BoltBodyHeight.ToString();
 			InnerRingDiameterTextBox.Text = _detailParameters.InnerRingDiameter.ToString();
 			OuterRingDiameterTextBox.Text = _detailParameters.OuterRingDiameter.ToString();
 			ThreadDiameterTextBox.Text = _detailParameters.ThreadDiameter.ToString();
 			HeadDiameterTextBox.Text = _detailParameters.HeadDiameter.ToString();
-			HeadHeightTextBox.Text = _detailParameters.BoltHeadHeight.ToString();
+			BoltHeadHeightTextBox.Text = _detailParameters.BoltHeadHeight.ToString();
 		}
 
 		/// <summary>
@@ -60,11 +83,11 @@ namespace KompasPlugin
 			if (!_isCheckDependencies)
 			{
 				_isCheckDependencies = true;
-				SetValueParameter(InnerRingDiameterTextBox, InnerRingDiameterErrorToolTip,
+				SetValueParameter(InnerRingDiameterTextBox, ToolTip,
 					Parameters.InnerRingDiameter);
-				SetValueParameter(OuterRingDiameterTextBox, OuterRingDiameterErrorToolTip,
+				SetValueParameter(OuterRingDiameterTextBox, ToolTip,
 					Parameters.OuterRingDiameter);
-				SetValueParameter(ThreadDiameterTextBox, ThreadDiameterErrorToolTip,
+				SetValueParameter(ThreadDiameterTextBox, ToolTip,
 					Parameters.ThreadDiameter);
 				_isCheckDependencies = false;
 			}
@@ -77,54 +100,14 @@ namespace KompasPlugin
 		/// <returns></returns>
 		private string GetNameLabel(Parameters parameter)
 		{
-			//TODO: не нужна переменная
-			var labelText = string.Empty;
-			switch (parameter)
-			{
-				case Parameters.BoltBodyHeight:
-				{
-					labelText = "Длина болта: ";
-					break;
-				}
-				case Parameters.InnerRingDiameter:
-				{
-					labelText = "Диаметр внутреннего кольца: ";
-					break;
-				}
-				case Parameters.OuterRingDiameter:
-				{
-					labelText = "Диаметр внешнего кольца: ";
-					break;
-				}
-				case Parameters.ThreadDiameter:
-				{
-					labelText = "Диаметр резьбы: ";
-					break;
-				}
-				case Parameters.HeadDiameter:
-				{
-					labelText = "Диаметр шляпки болта:";
-					break;
-				}
-				case Parameters.BoltHeadHeight:
-				{
-					labelText = "Высота шляпки болта:";
-					break;
-				}
-				default:
-				{
-					throw new ArgumentOutOfRangeException(nameof(parameter), parameter, null);
-				}
-			}
-
-			return labelText;
+			return _labels[parameter].Text;
 		}
 
 		/// <summary>
 		/// Установить значение параметру детали
 		/// </summary>
 		/// <param name="textBox"><see cref="TextBox"/> из которого будет браться значение</param>
-		/// <param name="toolTip"><see cref="ToolTip"/> для показа ошибки</param>
+		/// <param name="toolTip"><see cref="System.Windows.Forms.ToolTip"/> для показа ошибки</param>
 		/// <param name="parameter">Параметр для записи</param>
 		private void SetValueParameter(TextBox textBox, ToolTip toolTip, Parameters parameter)
 		{
@@ -157,6 +140,32 @@ namespace KompasPlugin
 			toolTip.Hide(textBox);
 		}
 
+		/// <summary>
+		/// Ищет <see cref="Parameters"/> по имени <see cref="TextBox"/>
+		/// </summary>
+		/// <param name="textBox"></param>
+		/// <returns></returns>
+		private Parameters FindParameters(string textBoxName)
+		{
+			var parameters = Enum.GetValues(typeof(Parameters))
+				.Cast<Parameters>()
+				.ToList();
+			foreach (var parameter in parameters)
+			{
+				if (textBoxName.Contains(parameter.ToString()))
+				{
+					return parameter;
+				}
+			}
+
+			throw new ArgumentException("Не найден параметр");
+		}
+
+		/// <summary>
+		/// Обработчик нажатия на кнопку
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BuilderButton_Click(object sender, MouseEventArgs e)
         {
 	        if (_errors.Any())
@@ -175,41 +184,39 @@ namespace KompasPlugin
             builder.Build();
         }
 
-		//TODO: дубли сократить
-        private void BodyHeightTextBox_TextChanged(object sender, EventArgs e)
+		/// <summary>
+		/// Обработчик события для <see cref="TextBox"/> изменении текста
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void AnyTextBox_TextChanged(object sender, EventArgs e)
 		{
-			SetValueParameter(BodyHeightTextBox, BodyHeightErrorToolTip,
-				Parameters.BoltBodyHeight);
+			if (!(sender is TextBox textBox))
+			{
+				return;
+			}
+			
+			SetValueParameter(textBox, ToolTip, FindParameters(textBox.Name));
 		}
 
-		private void InnerRingDiameterTextBox_TextChanged(object sender, EventArgs e)
+		/// <summary>
+		/// Обработчик события для <see cref="TextBox"/> при нажатии на <see cref="TextBox"/>
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void AnyTextBox_Enter(object sender, EventArgs e)
 		{
-			SetValueParameter(InnerRingDiameterTextBox, InnerRingDiameterErrorToolTip,
-				Parameters.InnerRingDiameter);
-		}
-
-		private void OuterRingDiameterTextBox_TextChanged(object sender, EventArgs e)
-		{
-			SetValueParameter(OuterRingDiameterTextBox, OuterRingDiameterErrorToolTip,
-				Parameters.OuterRingDiameter);
-		}
-
-		private void ThreadDiameterTextBox_TextChanged(object sender, EventArgs e)
-		{
-			SetValueParameter(ThreadDiameterTextBox, ThreadDiameterErrorToolTip,
-				Parameters.ThreadDiameter);
-		}
-
-		private void HeadDiameterTextBox_TextChanged(object sender, EventArgs e)
-		{
-			SetValueParameter(HeadDiameterTextBox, HeadDiameterErrorToolTip,
-				Parameters.HeadDiameter);
-		}
-
-		private void HeadHeightTextBox_TextChanged(object sender, EventArgs e)
-		{
-			SetValueParameter(HeadHeightTextBox, HeadHeightErrorToolTip,
-				Parameters.BoltHeadHeight);
+			if (!(sender is TextBox textBox))
+			{
+				return;
+			}
+			
+			ToolTip.Hide(this);
+			var parameter = FindParameters(textBox.Name);
+			if (_errors.ContainsKey(parameter))
+			{
+				ToolTip.Show(_errors[parameter], textBox);
+			}
 		}
 	}
 }

@@ -56,7 +56,8 @@ namespace Core
 			{
 				const double minValue = 2.0;
 				const double maxValue = 4.0;
-				SetValue(ref _boltHeadHeight, value, minValue, maxValue);
+				SetValue(ref _boltHeadHeight, value,
+					minValue, maxValue);
 			}
 		}
 
@@ -70,7 +71,8 @@ namespace Core
 			{
 				const double minValue = 10.0;
 				const double maxValue = 20.0;
-				SetValue(ref _boltBodyHeight, value, minValue, maxValue);
+				SetValue(ref _boltBodyHeight, value,
+					minValue, maxValue);
 			}
 		}
 
@@ -84,7 +86,8 @@ namespace Core
 			{
 				const double minValue = 10.0;
 				const double maxValue = 15.0;
-				SetValue(ref _headDiameter, value, minValue, maxValue);
+				SetValue(ref _headDiameter, value,
+					minValue, maxValue);
 			}
 		}
 
@@ -103,7 +106,8 @@ namespace Core
 					maxValue = OuterRingDiameter - Accuracy;
 				}
 
-				SetValue(ref _innerRingDiameter, value, minValue, maxValue);
+				SetValue(ref _innerRingDiameter, value,
+					minValue, maxValue);
 			}
 		}
 
@@ -122,7 +126,8 @@ namespace Core
 					minValue = InnerRingDiameter + Accuracy;
 				}
 
-				SetValue(ref _outerRingDiameter, value, minValue, maxValue);
+				SetValue(ref _outerRingDiameter, value,
+					minValue, maxValue);
 			}
 		}
 
@@ -142,7 +147,8 @@ namespace Core
 					minValue = InnerRingDiameter - 3 * Accuracy;
 				}
 
-				SetValue(ref _threadDiameter, value, minValue, maxValue);
+				SetValue(ref _threadDiameter, value,
+					minValue, maxValue);
 			}
 		}
 

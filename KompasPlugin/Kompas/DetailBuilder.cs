@@ -62,7 +62,7 @@ namespace Kompas
 			document2D.ksCircle(0, 0, _detailParameters.OuterRingDiameter / 2, 1);
 			sketchDefinition.EndEdit();
 
-			BossExtrusion(part, sketch, _detailParameters.BoltBodyHeight);
+			_kompasWrapper.BossExtrusion(part, sketch, _detailParameters.BoltBodyHeight);
 			CreateThread(part, plane);
 		}
 
@@ -72,7 +72,7 @@ namespace Kompas
 		/// <param name="part">Интерфейс детали</param>
 		private void CreateThread(ksPart part, ksEntity plane)
 		{
-			var sketch = GetPlaneXozSketch(part, out var sketchDefinition);
+			var sketch = _kompasWrapper.GetPlaneXozSketch(part, out var sketchDefinition);
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = (ksDocument2D)sketchDefinition.BeginEdit();
@@ -103,7 +103,7 @@ namespace Kompas
 			conicSpiral.hidden = true;
 			conicSpiral.Create();
 
-			CutEvolution(part, sketch, conicSpiral);
+			_kompasWrapper.CutEvolution(part, sketch, conicSpiral);
 		}
 
 		/// <summary>
@@ -111,7 +111,7 @@ namespace Kompas
 		/// </summary>
 		private void CreateHead(ksPart part)
 		{
-			var plane = CreatePlaneOffsetXoy(part, _detailParameters.BoltBodyHeight);
+			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part, _detailParameters.BoltBodyHeight);
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
 			ksSketchDefinition sketchDefinition = sketch.GetDefinition();
 			sketchDefinition.SetPlane(plane);
@@ -122,7 +122,7 @@ namespace Kompas
 			document2D.ksCircle(0, 0, _detailParameters.HeadDiameter / 2, 1);
 			sketchDefinition.EndEdit();
 
-			BossExtrusion(part, sketch, _detailParameters.BoltHeadHeight);
+			_kompasWrapper.BossExtrusion(part, sketch, _detailParameters.BoltHeadHeight);
 			CreateHeadRounding(part, sketch);
 			CreateHeadHole(part);
 		}
@@ -133,7 +133,7 @@ namespace Kompas
 		/// <param name="part"></param>
 		private void CreateHeadHole(ksPart part)
 		{
-			var plane = CreatePlaneOffsetXoy(part, 
+			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part, 
 				_detailParameters.BoltBodyHeight + _detailParameters.BoltHeadHeight);
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
 			ksSketchDefinition sketchDefinition = sketch.GetDefinition();
@@ -181,7 +181,7 @@ namespace Kompas
 		/// <param name="head"></param>
 		private void CreateHeadRounding(ksPart part, ksEntity head)
 		{
-			var sketch = GetPlaneXozSketch(part, out var sketchDefinition);
+			var sketch = _kompasWrapper.GetPlaneXozSketch(part, out var sketchDefinition);
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = sketchDefinition.BeginEdit();
@@ -195,77 +195,7 @@ namespace Kompas
 			document2D.ksArcBy3Points(x, y, x - 0.1 * x, y + deltaY / 2, deltaX, y + deltaY, 1);
 			sketchDefinition.EndEdit();
 
-			CutEvolution(part, sketch, head);
-		}
-
-		/// <summary>
-		/// Выдавливание объекта
-		/// </summary>
-		/// <param name="part"></param>
-		/// <param name="sketch"></param>
-		/// <param name="height"></param>
-		private void BossExtrusion(ksPart part, ksEntity sketch, double height)
-		{
-			ksEntity extrude = part.NewEntity((int)Obj3dType.o3d_bossExtrusion);
-			ksBossExtrusionDefinition extrudeDefinition = extrude.GetDefinition();
-			extrudeDefinition.directionType = (int)Direction_Type.dtNormal;
-			extrudeDefinition.SetSketch(sketch);
-			ksExtrusionParam extrudeParam = extrudeDefinition.ExtrusionParam();
-			extrudeParam.depthNormal = height;
-			extrude.Create();
-		}
-
-		/// <summary>
-		/// Выдавливание вырезанием по траектории
-		/// </summary>
-		/// <param name="part"></param>
-		/// <param name="sketch"></param>
-		/// <param name="trajectory"></param>
-		private void CutEvolution(ksPart part, ksEntity sketch, ksEntity trajectory)
-		{
-			ksEntity cinematicEvolition =
-				(ksEntity)part.NewEntity((short)Obj3dType.o3d_cutEvolution);
-			ksCutEvolutionDefinition cutEvolutionDefinition =
-				(ksCutEvolutionDefinition)cinematicEvolition.GetDefinition();
-			cutEvolutionDefinition.SetSketch(sketch);
-			ksEntityCollection collection =
-				(ksEntityCollection)cutEvolutionDefinition.PathPartArray();
-			collection.Add(trajectory);
-			cinematicEvolition.Create();
-		}
-
-		/// <summary>
-		/// Создание плоскости относительно плоскости XOY на расстоянии <see cref="offsetValue"/> 
-		/// </summary>
-		/// <param name="part"></param>
-		/// <param name="offsetValue"></param>
-		/// <returns></returns>
-		private ksEntity CreatePlaneOffsetXoy(ksPart part, double offsetValue)
-		{
-			ksEntity planeXoy = part.GetDefaultEntity((int)Obj3dType.o3d_planeXOY);
-			ksEntity plane = part.NewEntity((int)Obj3dType.o3d_planeOffset);
-			ksPlaneOffsetDefinition planeOffsetDefinition = plane.GetDefinition();
-			planeOffsetDefinition.direction = true;
-			planeOffsetDefinition.offset = offsetValue;
-			planeOffsetDefinition.SetPlane(planeXoy);
-			plane.Create();
-			return plane;
-		}
-
-        /// <summary>
-        /// Получить эскиз относительно плоскости XOZ
-        /// </summary>
-        /// <param name="part"></param>
-        /// <param name="sketchDefinition"></param>
-        /// <returns></returns>
-        private ksEntity GetPlaneXozSketch(ksPart part, out ksSketchDefinition sketchDefinition)
-		{
-			ksEntity plane = part.GetDefaultEntity((int)Obj3dType.o3d_planeXOZ);
-			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
-			sketchDefinition = sketch.GetDefinition();
-			sketchDefinition.SetPlane(plane);
-			sketch.Create();
-			return sketch;
+			_kompasWrapper.CutEvolution(part, sketch, head);
 		}
 	}
 }
