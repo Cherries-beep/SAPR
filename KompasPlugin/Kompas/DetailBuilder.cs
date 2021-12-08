@@ -161,7 +161,7 @@ namespace Kompas
 				{
 					nextIndex = 0;
 				}
-
+                //TODO: rsdn
 				document2D.ksLineSeg(points[i].X, points[i].Y, points[nextIndex].X, points[nextIndex].Y, 1);
 			}
 

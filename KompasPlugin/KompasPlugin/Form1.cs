@@ -8,6 +8,7 @@ using Kompas;
 
 namespace KompasPlugin
 {
+	//TODO: naming
     public partial class Form1 : Form
     {
         /// <summary>
@@ -25,6 +26,7 @@ namespace KompasPlugin
 		/// </summary>
 		private readonly Dictionary<Parameters, Label> _labels;
 
+		//TODO: Не используются?
 		/// <summary>
 		/// Список всех <see cref="System.Windows.Forms.ToolTip"/>
 		/// </summary>
@@ -140,6 +142,7 @@ namespace KompasPlugin
 			toolTip.Hide(textBox);
 		}
 
+		//TODO: xml комментарии
 		/// <summary>
 		/// Ищет <see cref="Parameters"/> по имени <see cref="TextBox"/>
 		/// </summary>
@@ -189,7 +192,6 @@ namespace KompasPlugin
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		//TODO: дубли сократить
 		private void AnyTextBox_TextChanged(object sender, EventArgs e)
 		{
 			if (!(sender is TextBox textBox))

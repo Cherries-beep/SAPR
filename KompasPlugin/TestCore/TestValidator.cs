@@ -20,6 +20,7 @@ namespace TestCore
 		/// </summary>
 		private const double MaxValue = 15.0;
 
+		//TODO: Убрать дубли.
 		[TestCase(TestName = "Проверка отправки корректного значения, входящего в диапазон")]
 		public void TestValidate_CorrectValue()
 		{

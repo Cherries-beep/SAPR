@@ -236,6 +236,7 @@ namespace Core
 				Validator.Validate(value, minValue, maxValue);
 			}
 
+			//TODO: Лучше вернуть новое значение
 			field = value;
 		}
 	}
