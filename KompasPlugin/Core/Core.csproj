@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DetailParameters.cs" />
-    <Compile Include="Parameters.cs" />
+    <Compile Include="Parameter.cs" />
+    <Compile Include="ParameterTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScrewdriverTypes.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

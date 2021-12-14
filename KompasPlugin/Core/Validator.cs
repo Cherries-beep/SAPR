@@ -18,8 +18,9 @@ namespace Core
 		{
 			if (value < minValue || value > maxValue)
 			{
-                //TODO: rsdn
-				throw new ArgumentException($"Значение не входит в диапазон. Диапазон {minValue} — {maxValue}");
+                //TODO: rsdn(+)
+				throw new ArgumentException(
+					$"Значение не входит в диапазон. Диапазон {minValue} — {maxValue}");
 			}
 		}
 

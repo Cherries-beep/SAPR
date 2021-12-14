@@ -82,7 +82,7 @@ namespace Kompas
 		/// <param name="part"></param>
 		/// <param name="sketch"></param>
 		/// <param name="trajectory"></param>
-		public void CutEvolution(ksPart part, ksEntity sketch, ksEntity trajectory)
+		public void CutTrajectoryEvolution(ksPart part, ksEntity sketch, ksEntity trajectory)
 		{
 			ksEntity cinematicEvolition =
 				(ksEntity)part.NewEntity((short)Obj3dType.o3d_cutEvolution);
@@ -93,6 +93,27 @@ namespace Kompas
 				(ksEntityCollection)cutEvolutionDefinition.PathPartArray();
 			collection.Add(trajectory);
 			cinematicEvolition.Create();
+		}
+
+		/// <summary>
+		/// Выдавливание с вырезом
+		/// </summary>
+		/// <param name="part"></param>
+		/// <param name="sketch"></param>
+		public void CutEvolution(ksPart part, ksEntity sketch)
+		{
+			// Выдавливание с вырезом
+			ksEntity cutExtrusion =
+				(ksEntity)part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+			ksCutExtrusionDefinition extrusionDefinition =
+				cutExtrusion.GetDefinition();
+			ksExtrusionParam extrusionParam =
+				(ksExtrusionParam)extrusionDefinition.ExtrusionParam();
+			extrusionDefinition.SetSketch(sketch);
+			extrusionParam.direction = (short)Direction_Type.dtNormal;
+			extrusionParam.typeNormal = (short)End_Type.etBlind;
+			extrusionParam.depthNormal = 1;
+			cutExtrusion.Create();
 		}
 
 		/// <summary>

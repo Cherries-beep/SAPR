@@ -20,48 +20,20 @@ namespace TestCore
 		/// </summary>
 		private const double MaxValue = 15.0;
 
-		//TODO: Убрать дубли.
-		[TestCase(TestName = "Проверка отправки корректного значения, входящего в диапазон")]
-		public void TestValidate_CorrectValue()
+		//TODO: Убрать дубли.(+)
+		[TestCase(10, TestName = "Проверка отправки корректного значения, входящего в диапазон")]
+		[TestCase(MinValue, TestName = "Проверка отправки корректного значения, равному минимальному значению")]
+		[TestCase(MaxValue, TestName = "Проверка отправки корректного значения, равному максимальному значению")]
+		public void TestValidate_CorrectValue(double value)
 		{
-			const double value = 10.0;
-
 			Assert.DoesNotThrow(() => Validator.Validate(value, MinValue, MaxValue),
 				$"Значение должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
 
-		[TestCase(TestName = "Проверка отправки корректного значения, равному минимальному значению")]
-		public void TestValidate_CorrectValueEqualMinValue()
+		[TestCase(3, TestName = "Проверка отправки значения меньшего минимального")]
+		[TestCase(20, TestName = "Проверка отправки значения больше максимального")]
+		public void TestValidate_BelowMinValue(double value)
 		{
-			const double value = MinValue;
-
-			Assert.DoesNotThrow(() => Validator.Validate(value, MinValue, MaxValue),
-				$"Значение должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
-		}
-
-		[TestCase(TestName = "Проверка отправки корректного значения, равному максимальному значению")]
-		public void TestValidate_CorrectValueEqualMaxValue()
-		{
-			const double value = MaxValue;
-
-			Assert.DoesNotThrow(() => Validator.Validate(value, MinValue, MaxValue),
-				$"Значение должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
-		}
-
-		[TestCase(TestName = "Проверка отправки значения меньшего минимального")]
-		public void TestValidate_BelowMinValue()
-		{
-			const double value = 3.0;
-
-			Assert.Throws<ArgumentException>(() => Validator.Validate(value, MinValue, MaxValue),
-				$"Значение не должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
-		}
-
-		[TestCase(TestName = "Проверка отправки значения больше максимального")]
-		public void TestValidate_AboveMaxValue()
-		{
-			const double value = 20.0;
-
 			Assert.Throws<ArgumentException>(() => Validator.Validate(value, MinValue, MaxValue),
 				$"Значение не должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
@@ -81,20 +53,12 @@ namespace TestCore
 			Assert.AreEqual(expected, actual, "При парсе получилось не то значение");
 		}
 
-		[TestCase(TestName = "Проверка парса пустой строки")]
-		public void TestGetValueFromString_EmptyString()
+		[TestCase("", TestName = "Проверка парса пустой строки")]
+		[TestCase("qwewq123qw", TestName = "Проверка парса неправильной строки")]
+		public void TestGetValueFromString_EmptyString(string value)
 		{
-			Assert.Throws<ArgumentException>(() => Validator.GetValueFromString(string.Empty),
-				"Запарсилось пустая строка");
-		}
-
-		[TestCase(TestName = "Проверка парса неправильной строки")]
-		public void TestGetValueFromString_WrongString()
-		{
-			var value = "qwewq123qw";
-
 			Assert.Throws<ArgumentException>(() => Validator.GetValueFromString(value),
-				"Запарсилось неправильная строка");
+				"Запарсилось пустая строка");
 		}
 	}
 }

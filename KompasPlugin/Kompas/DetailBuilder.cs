@@ -59,11 +59,14 @@ namespace Kompas
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = sketchDefinition.BeginEdit();
-			document2D.ksCircle(0, 0, _detailParameters.ThreadDiameter / 2, 1);
-			document2D.ksCircle(0, 0, _detailParameters.OuterRingDiameter / 2, 1);
+			document2D.ksCircle(0, 0, _detailParameters.GetValue(
+				ParameterTypes.ThreadDiameter) / 2, 1);
+			document2D.ksCircle(0, 0, _detailParameters.GetValue(
+				ParameterTypes.OuterRingDiameter) / 2, 1);
 			sketchDefinition.EndEdit();
 
-			_kompasWrapper.BossExtrusion(part, sketch, _detailParameters.BoltBodyHeight);
+			_kompasWrapper.BossExtrusion(part, sketch, _detailParameters.GetValue(
+				ParameterTypes.BoltBodyHeight));
 			CreateThread(part, plane);
 		}
 
@@ -77,9 +80,10 @@ namespace Kompas
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = (ksDocument2D)sketchDefinition.BeginEdit();
-			var x = _detailParameters.InnerRingDiameter / 2;
+			var x = _detailParameters.GetValue(ParameterTypes.InnerRingDiameter) / 2;
 			var y = 0;
-			var delta = _detailParameters.InnerRingDiameter - _detailParameters.ThreadDiameter;
+			var delta = _detailParameters.GetValue(ParameterTypes.InnerRingDiameter) - 
+			            _detailParameters.GetValue(ParameterTypes.ThreadDiameter);
 			var point1 = new Point(x, y);
 			var point2 = new Point(x - delta, y - delta);
 			var point3 = new Point(x - delta, y + delta);
@@ -95,16 +99,18 @@ namespace Kompas
 				(ksCylindricSpiralDefinition)conicSpiral.GetDefinition();
 			cylindricalSpiralDefinition.diamType = 0;
 			cylindricalSpiralDefinition.buildDir = true;
-			cylindricalSpiralDefinition.diam = _detailParameters.ThreadDiameter * 0.5;
+			cylindricalSpiralDefinition.diam = _detailParameters.GetValue(
+				ParameterTypes.ThreadDiameter) * 0.5;
 			cylindricalSpiralDefinition.buildMode = 2;
 			cylindricalSpiralDefinition.turn = 20;
-			cylindricalSpiralDefinition.height = _detailParameters.BoltBodyHeight;
+			cylindricalSpiralDefinition.height = _detailParameters.GetValue(
+				ParameterTypes.BoltBodyHeight);
 			cylindricalSpiralDefinition.SetPlane(plane);
 			conicSpiral.SetAdvancedColor(0);
 			conicSpiral.hidden = true;
 			conicSpiral.Create();
 
-			_kompasWrapper.CutEvolution(part, sketch, conicSpiral);
+			_kompasWrapper.CutTrajectoryEvolution(part, sketch, conicSpiral);
 		}
 
 		/// <summary>
@@ -112,7 +118,8 @@ namespace Kompas
 		/// </summary>
 		private void CreateHead(ksPart part)
 		{
-			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part, _detailParameters.BoltBodyHeight);
+			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part, _detailParameters.
+				GetValue(ParameterTypes.BoltBodyHeight));
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
 			ksSketchDefinition sketchDefinition = sketch.GetDefinition();
 			sketchDefinition.SetPlane(plane);
@@ -120,22 +127,81 @@ namespace Kompas
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = sketchDefinition.BeginEdit();
-			document2D.ksCircle(0, 0, _detailParameters.HeadDiameter / 2, 1);
+			document2D.ksCircle(0, 0, _detailParameters.GetValue(
+				ParameterTypes.HeadDiameter) / 2, 1);
 			sketchDefinition.EndEdit();
 
-			_kompasWrapper.BossExtrusion(part, sketch, _detailParameters.BoltHeadHeight);
+			_kompasWrapper.BossExtrusion(part, sketch, _detailParameters.GetValue(
+				ParameterTypes.BoltHeadHeight));
 			CreateHeadRounding(part, sketch);
-			CreateHeadHole(part);
+			switch (_detailParameters.ScrewdriverType)
+			{
+				case ScrewdriverTypes.Hexagonal:
+				{
+					CreateHexagonalHeadHole(part);
+					break;
+				}
+				case ScrewdriverTypes.Cross:
+				{
+					CreateCrossHeadHole(part);
+					break;
+				}
+				case ScrewdriverTypes.Slotted:
+				{
+					CreateSlottedHeadHole(part);
+					break;
+				}
+			}
 		}
 
 		/// <summary>
-		/// Создает отверстие для отвертки
+		/// Создает отверстие для отвертки шлиц
+		/// </summary>
+		private void CreateSlottedHeadHole(ksPart part)
+		{
+			var radius = _detailParameters.GetValue(
+				ParameterTypes.OuterRingDiameter) / 2;
+			var x = 0.5;
+			var y = Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(x, 2));
+			var points = new List<Point>
+			{
+				new Point(-x, y),
+				new Point(x, -y)
+			};
+
+			CreateRectanglesByPoints(part, points);
+		}
+
+		/// <summary>
+		/// Создает отверстие для отвертки крестовая
+		/// </summary>
+		private void CreateCrossHeadHole(ksPart part)
+		{
+			var radius = _detailParameters.GetValue(
+				ParameterTypes.OuterRingDiameter) / 2;
+			var x = 0.5;
+			var y = Math.Sqrt(Math.Pow(radius, 2) - Math.Pow(x, 2));
+			var points = new List<Point>
+			{
+				new Point(-x, y),
+				new Point(x, -y),
+				new Point(-y, x),
+				new Point(y, -x),
+			};
+
+			CreateRectanglesByPoints(part, points);
+		}
+
+		/// <summary>
+		/// Создает несколько прямоугольников по точкам
 		/// </summary>
 		/// <param name="part"></param>
-		private void CreateHeadHole(ksPart part)
+		/// <param name="points"></param>
+		private void CreateRectanglesByPoints(ksPart part, List<Point> points)
 		{
-			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part, 
-				_detailParameters.BoltBodyHeight + _detailParameters.BoltHeadHeight);
+			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part,
+				_detailParameters.GetValue(ParameterTypes.BoltBodyHeight) +
+				_detailParameters.GetValue(ParameterTypes.BoltHeadHeight));
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
 			ksSketchDefinition sketchDefinition = sketch.GetDefinition();
 			sketchDefinition.SetPlane(plane);
@@ -143,7 +209,48 @@ namespace Kompas
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = sketchDefinition.BeginEdit();
-			var radius = _detailParameters.OuterRingDiameter / 2;
+			var radius = _detailParameters.GetValue(
+				ParameterTypes.OuterRingDiameter) / 2;
+			for (var i = 0; i < points.Count; i += 2)
+			{
+				CreateRectangle(points[i], points[i + 1], document2D);
+			}
+
+			sketchDefinition.EndEdit();
+			_kompasWrapper.CutEvolution(part, sketch);
+		}
+
+		/// <summary>
+		/// Создать прямоугольник по двум точкам
+		/// </summary>
+		/// <param name="point1"></param>
+		/// <param name="point2"></param>
+		private void CreateRectangle(Point point1, Point point2, ksDocument2D document2D)
+		{
+			document2D.ksLineSeg(point1.X, -point1.Y, point2.X, -point1.Y, 1);
+			document2D.ksLineSeg(point2.X, -point1.Y, point2.X, -point2.Y, 1);
+			document2D.ksLineSeg(point1.X, -point2.Y, point2.X, -point2.Y, 1);
+			document2D.ksLineSeg(point1.X, -point1.Y, point1.X, -point2.Y, 1);
+		}
+
+		/// <summary>
+		/// Создает отверстие для отвертки шестиугольник
+		/// </summary>
+		/// <param name="part"></param>
+		private void CreateHexagonalHeadHole(ksPart part)
+		{
+			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part, 
+				_detailParameters.GetValue(ParameterTypes.BoltBodyHeight) + 
+				_detailParameters.GetValue(ParameterTypes.BoltHeadHeight));
+			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
+			ksSketchDefinition sketchDefinition = sketch.GetDefinition();
+			sketchDefinition.SetPlane(plane);
+			sketch.Create();
+
+			// Входим в режим редактирования эскиза
+			ksDocument2D document2D = sketchDefinition.BeginEdit();
+			var radius = _detailParameters.GetValue(
+				ParameterTypes.OuterRingDiameter) / 2;
 			var x = radius;
 			var y = 0.0;
 			var angle = 60 * Math.PI / 180;
@@ -161,24 +268,13 @@ namespace Kompas
 				{
 					nextIndex = 0;
 				}
-                //TODO: rsdn
-				document2D.ksLineSeg(points[i].X, points[i].Y, points[nextIndex].X, points[nextIndex].Y, 1);
+                //TODO: rsdn (+)
+				document2D.ksLineSeg(points[i].X, points[i].Y,
+					points[nextIndex].X, points[nextIndex].Y, 1);
 			}
 
 			sketchDefinition.EndEdit();
-
-			// Выдавливание с вырезом
-			ksEntity cutExtrusion =
-				(ksEntity)part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
-			ksCutExtrusionDefinition extrusionDefinition =
-				cutExtrusion.GetDefinition();
-			ksExtrusionParam extrusionParam =
-				(ksExtrusionParam)extrusionDefinition.ExtrusionParam();
-			extrusionDefinition.SetSketch(sketch);
-			extrusionParam.direction = (short)Direction_Type.dtNormal;
-			extrusionParam.typeNormal = (short)End_Type.etBlind;
-			extrusionParam.depthNormal = 1;
-			cutExtrusion.Create();
+			_kompasWrapper.CutEvolution(part, sketch);
 		}
 
 		/// <summary>
@@ -192,17 +288,19 @@ namespace Kompas
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = sketchDefinition.BeginEdit();
-			var x = _detailParameters.HeadDiameter / 2;
-			var y = -_detailParameters.BoltBodyHeight;
-			var deltaY = -_detailParameters.BoltHeadHeight;
-			var deltaX = _detailParameters.OuterRingDiameter / 2;
+			var x = _detailParameters.
+				GetValue(ParameterTypes.HeadDiameter) / 2;
+			var y = -_detailParameters.GetValue(ParameterTypes.BoltBodyHeight);
+			var deltaY = -_detailParameters.GetValue(ParameterTypes.BoltHeadHeight);
+			var deltaX = _detailParameters.GetValue(ParameterTypes.OuterRingDiameter) / 2;
 			document2D.ksLineSeg(x, y, x, y + deltaY, 1);
 			document2D.ksLineSeg(x, y + deltaY, deltaX, y + deltaY, 1);
-			//TODO: rsdn
-			document2D.ksArcBy3Points(x, y, x - 0.1 * x, y + deltaY / 2, deltaX, y + deltaY, 1);
+			//TODO: rsdn (+)
+			document2D.ksArcBy3Points(x, y, x - 0.1 * x,
+				y + deltaY / 2, deltaX, y + deltaY, 1);
 			sketchDefinition.EndEdit();
 
-			_kompasWrapper.CutEvolution(part, sketch, head);
+			_kompasWrapper.CutTrajectoryEvolution(part, sketch, head);
 		}
 	}
 }
