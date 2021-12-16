@@ -1,7 +1,7 @@
 ﻿
 namespace KompasPlugin
 {
-    partial class MainWindow
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,6 @@ namespace KompasPlugin
 			this.components = new System.ComponentModel.Container();
 			this.BuilderButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.label1 = new System.Windows.Forms.Label();
 			this.BoltHeadHeightTextBox = new System.Windows.Forms.TextBox();
 			this.BoltBodyHeightLabel = new System.Windows.Forms.Label();
 			this.BoltHeadHeightLabel = new System.Windows.Forms.Label();
@@ -51,7 +50,6 @@ namespace KompasPlugin
 			this.OuterRingDiameterTextBox = new System.Windows.Forms.TextBox();
 			this.ThreadDiameterTextBox = new System.Windows.Forms.TextBox();
 			this.HeadDiameterTextBox = new System.Windows.Forms.TextBox();
-			this.ScrewdriverTypeComboBox = new System.Windows.Forms.ComboBox();
 			this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -59,10 +57,10 @@ namespace KompasPlugin
 			// BuilderButton
 			// 
 			this.BuilderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BuilderButton.Location = new System.Drawing.Point(219, 294);
+			this.BuilderButton.Location = new System.Drawing.Point(203, 294);
 			this.BuilderButton.Name = "BuilderButton";
 			this.BuilderButton.Size = new System.Drawing.Size(75, 23);
-			this.BuilderButton.TabIndex = 8;
+			this.BuilderButton.TabIndex = 7;
 			this.BuilderButton.Text = "Построить";
 			this.BuilderButton.UseVisualStyleBackColor = true;
 			this.BuilderButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BuilderButton_Click);
@@ -75,7 +73,6 @@ namespace KompasPlugin
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 6);
 			this.tableLayoutPanel1.Controls.Add(this.BoltHeadHeightTextBox, 1, 5);
 			this.tableLayoutPanel1.Controls.Add(this.BoltBodyHeightLabel, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.BoltHeadHeightLabel, 0, 5);
@@ -94,34 +91,22 @@ namespace KompasPlugin
 			this.tableLayoutPanel1.Controls.Add(this.OuterRingDiameterTextBox, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.ThreadDiameterTextBox, 1, 3);
 			this.tableLayoutPanel1.Controls.Add(this.HeadDiameterTextBox, 1, 4);
-			this.tableLayoutPanel1.Controls.Add(this.ScrewdriverTypeComboBox, 1, 6);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 7;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(282, 276);
+			this.tableLayoutPanel1.RowCount = 6;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(266, 276);
 			this.tableLayoutPanel1.TabIndex = 1;
-			// 
-			// label1
-			// 
-			this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 248);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(133, 13);
-			this.label1.TabIndex = 18;
-			this.label1.Text = "Отверстия под отвёртку:";
 			// 
 			// BoltHeadHeightTextBox
 			// 
 			this.BoltHeadHeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.BoltHeadHeightTextBox.Location = new System.Drawing.Point(173, 204);
+			this.BoltHeadHeightTextBox.Location = new System.Drawing.Point(173, 240);
 			this.BoltHeadHeightTextBox.Name = "BoltHeadHeightTextBox";
 			this.BoltHeadHeightTextBox.Size = new System.Drawing.Size(56, 20);
 			this.BoltHeadHeightTextBox.TabIndex = 6;
@@ -132,7 +117,7 @@ namespace KompasPlugin
 			// 
 			this.BoltBodyHeightLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.BoltBodyHeightLabel.AutoSize = true;
-			this.BoltBodyHeightLabel.Location = new System.Drawing.Point(3, 13);
+			this.BoltBodyHeightLabel.Location = new System.Drawing.Point(3, 16);
 			this.BoltBodyHeightLabel.Name = "BoltBodyHeightLabel";
 			this.BoltBodyHeightLabel.Size = new System.Drawing.Size(75, 13);
 			this.BoltBodyHeightLabel.TabIndex = 0;
@@ -142,7 +127,7 @@ namespace KompasPlugin
 			// 
 			this.BoltHeadHeightLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.BoltHeadHeightLabel.AutoSize = true;
-			this.BoltHeadHeightLabel.Location = new System.Drawing.Point(3, 208);
+			this.BoltHeadHeightLabel.Location = new System.Drawing.Point(3, 244);
 			this.BoltHeadHeightLabel.Name = "BoltHeadHeightLabel";
 			this.BoltHeadHeightLabel.Size = new System.Drawing.Size(121, 13);
 			this.BoltHeadHeightLabel.TabIndex = 5;
@@ -152,7 +137,7 @@ namespace KompasPlugin
 			// 
 			this.BoltBodyHeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.BoltBodyHeightTextBox.BackColor = System.Drawing.Color.White;
-			this.BoltBodyHeightTextBox.Location = new System.Drawing.Point(173, 9);
+			this.BoltBodyHeightTextBox.Location = new System.Drawing.Point(173, 12);
 			this.BoltBodyHeightTextBox.Name = "BoltBodyHeightTextBox";
 			this.BoltBodyHeightTextBox.Size = new System.Drawing.Size(56, 20);
 			this.BoltBodyHeightTextBox.TabIndex = 1;
@@ -163,7 +148,7 @@ namespace KompasPlugin
 			// 
 			this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(235, 13);
+			this.label7.Location = new System.Drawing.Point(235, 16);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(69, 13);
 			this.label7.TabIndex = 12;
@@ -173,7 +158,7 @@ namespace KompasPlugin
 			// 
 			this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(235, 52);
+			this.label8.Location = new System.Drawing.Point(235, 61);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(69, 13);
 			this.label8.TabIndex = 13;
@@ -183,7 +168,7 @@ namespace KompasPlugin
 			// 
 			this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(235, 91);
+			this.label9.Location = new System.Drawing.Point(235, 106);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(69, 13);
 			this.label9.TabIndex = 14;
@@ -193,7 +178,7 @@ namespace KompasPlugin
 			// 
 			this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(235, 130);
+			this.label10.Location = new System.Drawing.Point(235, 151);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(69, 13);
 			this.label10.TabIndex = 15;
@@ -203,7 +188,7 @@ namespace KompasPlugin
 			// 
 			this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(235, 169);
+			this.label11.Location = new System.Drawing.Point(235, 196);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(69, 13);
 			this.label11.TabIndex = 16;
@@ -213,7 +198,7 @@ namespace KompasPlugin
 			// 
 			this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
 			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(235, 208);
+			this.label12.Location = new System.Drawing.Point(235, 244);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(69, 13);
 			this.label12.TabIndex = 17;
@@ -223,7 +208,7 @@ namespace KompasPlugin
 			// 
 			this.InnerRingDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.InnerRingDiameterLabel.AutoSize = true;
-			this.InnerRingDiameterLabel.Location = new System.Drawing.Point(3, 52);
+			this.InnerRingDiameterLabel.Location = new System.Drawing.Point(3, 61);
 			this.InnerRingDiameterLabel.Name = "InnerRingDiameterLabel";
 			this.InnerRingDiameterLabel.Size = new System.Drawing.Size(161, 13);
 			this.InnerRingDiameterLabel.TabIndex = 2;
@@ -233,7 +218,7 @@ namespace KompasPlugin
 			// 
 			this.OuterRingDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.OuterRingDiameterLabel.AutoSize = true;
-			this.OuterRingDiameterLabel.Location = new System.Drawing.Point(3, 91);
+			this.OuterRingDiameterLabel.Location = new System.Drawing.Point(3, 106);
 			this.OuterRingDiameterLabel.Name = "OuterRingDiameterLabel";
 			this.OuterRingDiameterLabel.Size = new System.Drawing.Size(147, 13);
 			this.OuterRingDiameterLabel.TabIndex = 4;
@@ -243,7 +228,7 @@ namespace KompasPlugin
 			// 
 			this.ThreadDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.ThreadDiameterLabel.AutoSize = true;
-			this.ThreadDiameterLabel.Location = new System.Drawing.Point(3, 130);
+			this.ThreadDiameterLabel.Location = new System.Drawing.Point(3, 151);
 			this.ThreadDiameterLabel.Name = "ThreadDiameterLabel";
 			this.ThreadDiameterLabel.Size = new System.Drawing.Size(97, 13);
 			this.ThreadDiameterLabel.TabIndex = 3;
@@ -253,7 +238,7 @@ namespace KompasPlugin
 			// 
 			this.HeadDiameterLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.HeadDiameterLabel.AutoSize = true;
-			this.HeadDiameterLabel.Location = new System.Drawing.Point(3, 169);
+			this.HeadDiameterLabel.Location = new System.Drawing.Point(3, 196);
 			this.HeadDiameterLabel.Name = "HeadDiameterLabel";
 			this.HeadDiameterLabel.Size = new System.Drawing.Size(129, 13);
 			this.HeadDiameterLabel.TabIndex = 1;
@@ -262,7 +247,7 @@ namespace KompasPlugin
 			// InnerRingDiameterTextBox
 			// 
 			this.InnerRingDiameterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.InnerRingDiameterTextBox.Location = new System.Drawing.Point(173, 48);
+			this.InnerRingDiameterTextBox.Location = new System.Drawing.Point(173, 57);
 			this.InnerRingDiameterTextBox.Name = "InnerRingDiameterTextBox";
 			this.InnerRingDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.InnerRingDiameterTextBox.TabIndex = 2;
@@ -272,7 +257,7 @@ namespace KompasPlugin
 			// OuterRingDiameterTextBox
 			// 
 			this.OuterRingDiameterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.OuterRingDiameterTextBox.Location = new System.Drawing.Point(173, 87);
+			this.OuterRingDiameterTextBox.Location = new System.Drawing.Point(173, 102);
 			this.OuterRingDiameterTextBox.Name = "OuterRingDiameterTextBox";
 			this.OuterRingDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.OuterRingDiameterTextBox.TabIndex = 3;
@@ -282,7 +267,7 @@ namespace KompasPlugin
 			// ThreadDiameterTextBox
 			// 
 			this.ThreadDiameterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.ThreadDiameterTextBox.Location = new System.Drawing.Point(173, 126);
+			this.ThreadDiameterTextBox.Location = new System.Drawing.Point(173, 147);
 			this.ThreadDiameterTextBox.Name = "ThreadDiameterTextBox";
 			this.ThreadDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.ThreadDiameterTextBox.TabIndex = 4;
@@ -292,42 +277,24 @@ namespace KompasPlugin
 			// HeadDiameterTextBox
 			// 
 			this.HeadDiameterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-			this.HeadDiameterTextBox.Location = new System.Drawing.Point(173, 165);
+			this.HeadDiameterTextBox.Location = new System.Drawing.Point(173, 192);
 			this.HeadDiameterTextBox.Name = "HeadDiameterTextBox";
 			this.HeadDiameterTextBox.Size = new System.Drawing.Size(56, 20);
 			this.HeadDiameterTextBox.TabIndex = 5;
 			this.HeadDiameterTextBox.TextChanged += new System.EventHandler(this.AnyTextBox_TextChanged);
 			this.HeadDiameterTextBox.Enter += new System.EventHandler(this.AnyTextBox_Enter);
 			// 
-			// ScrewdriverTypeComboBox
-			// 
-			this.ScrewdriverTypeComboBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-			this.ScrewdriverTypeComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.tableLayoutPanel1.SetColumnSpan(this.ScrewdriverTypeComboBox, 2);
-			this.ScrewdriverTypeComboBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.ScrewdriverTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ScrewdriverTypeComboBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
-			this.ScrewdriverTypeComboBox.Items.AddRange(new object[] {
-            "Шестиугольник ",
-            "Крестовая",
-            "Шлиц"});
-			this.ScrewdriverTypeComboBox.Location = new System.Drawing.Point(173, 244);
-			this.ScrewdriverTypeComboBox.Name = "ScrewdriverTypeComboBox";
-			this.ScrewdriverTypeComboBox.Size = new System.Drawing.Size(109, 21);
-			this.ScrewdriverTypeComboBox.TabIndex = 7;
-			this.ScrewdriverTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.ScrewdriverTypeComboBox_SelectedIndexChanged);
-			// 
-			// MainWindow
+			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(306, 324);
+			this.ClientSize = new System.Drawing.Size(290, 324);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.BuilderButton);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "MainWindow";
+			this.Name = "Form1";
 			this.Text = "Болт с внутренней резьбой";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
@@ -358,8 +325,6 @@ namespace KompasPlugin
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.ToolTip ToolTip;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ComboBox ScrewdriverTypeComboBox;
 	}
 }
 

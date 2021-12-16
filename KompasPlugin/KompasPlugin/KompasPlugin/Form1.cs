@@ -8,22 +8,29 @@ using Kompas;
 
 namespace KompasPlugin
 {
-    public partial class MainWindow : Form
+	//TODO: naming
+    public partial class Form1 : Form
     {
         /// <summary>
         /// Параметры болта с внутренней резьбой
         /// </summary>
-	    private readonly DetailParameters _detailParameters;
+	    private DetailParameters _detailParameters;
 
 		/// <summary>
 		/// Словарь ошибок
 		/// </summary>
-        private readonly Dictionary<ParameterTypes, string> _errors = new Dictionary<ParameterTypes, string>();
+        private readonly Dictionary<Parameters, string> _errors = new Dictionary<Parameters, string>();
 
 		/// <summary>
 		/// Словарь <see cref="Label"/>
 		/// </summary>
-		private readonly Dictionary<ParameterTypes, Label> _labels;
+		private readonly Dictionary<Parameters, Label> _labels;
+
+		//TODO: Не используются?
+		/// <summary>
+		/// Список всех <see cref="System.Windows.Forms.ToolTip"/>
+		/// </summary>
+		private readonly List<ToolTip> _toolTips;
 
 		/// <summary>
 		/// Флаг отвечающий за проверку зависимостей
@@ -33,45 +40,39 @@ namespace KompasPlugin
 		/// <summary>
 		/// Конструктор формы
 		/// </summary>
-		public MainWindow()
+		public Form1()
         {
             InitializeComponent();
             ShowIcon = false;
             _detailParameters = new DetailParameters();
             _detailParameters.DependencyParameterChanged += OnDependencyParameterChanged;
-            SetDefaultParameter();
+            _detailParameters.DefaultParameter += OnDefaultParameter;
+			_detailParameters.SetMinValue();
 
-			_labels = new Dictionary<ParameterTypes, Label>
+			_labels = new Dictionary<Parameters, Label>
 			{
-				{ ParameterTypes.BoltBodyHeight, BoltBodyHeightLabel },
-				{ ParameterTypes.BoltHeadHeight, BoltHeadHeightLabel },
-				{ ParameterTypes.HeadDiameter, HeadDiameterLabel },
-				{ ParameterTypes.InnerRingDiameter, InnerRingDiameterLabel },
-				{ ParameterTypes.OuterRingDiameter, OuterRingDiameterLabel },
-				{ ParameterTypes.ThreadDiameter, ThreadDiameterLabel },
+				{ Parameters.BoltBodyHeight, BoltBodyHeightLabel },
+				{ Parameters.BoltHeadHeight, BoltHeadHeightLabel },
+				{ Parameters.HeadDiameter, HeadDiameterLabel },
+				{ Parameters.InnerRingDiameter, InnerRingDiameterLabel },
+				{ Parameters.OuterRingDiameter, OuterRingDiameterLabel },
+				{ Parameters.ThreadDiameter, ThreadDiameterLabel },
 			};
-
-			ScrewdriverTypeComboBox.SelectedIndex = 0;
         }
 
 		/// <summary>
 		/// Обработчик события установления параметров в стандартное значение
 		/// </summary>
-		private void SetDefaultParameter()
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnDefaultParameter(object sender, EventArgs e)
 		{
-			
-			BoltBodyHeightTextBox.Text = _detailParameters.GetValue(
-				ParameterTypes.BoltBodyHeight).ToString();
-			InnerRingDiameterTextBox.Text = _detailParameters.GetValue(
-				ParameterTypes.InnerRingDiameter).ToString();
-			OuterRingDiameterTextBox.Text = _detailParameters.GetValue(
-				ParameterTypes.OuterRingDiameter).ToString();
-			ThreadDiameterTextBox.Text = _detailParameters.GetValue(
-				ParameterTypes.ThreadDiameter).ToString();
-			HeadDiameterTextBox.Text = _detailParameters.GetValue(
-				ParameterTypes.HeadDiameter).ToString();
-			BoltHeadHeightTextBox.Text = _detailParameters.GetValue(
-				ParameterTypes.BoltHeadHeight).ToString();
+			BoltBodyHeightTextBox.Text = _detailParameters.BoltBodyHeight.ToString();
+			InnerRingDiameterTextBox.Text = _detailParameters.InnerRingDiameter.ToString();
+			OuterRingDiameterTextBox.Text = _detailParameters.OuterRingDiameter.ToString();
+			ThreadDiameterTextBox.Text = _detailParameters.ThreadDiameter.ToString();
+			HeadDiameterTextBox.Text = _detailParameters.HeadDiameter.ToString();
+			BoltHeadHeightTextBox.Text = _detailParameters.BoltHeadHeight.ToString();
 		}
 
 		/// <summary>
@@ -80,27 +81,28 @@ namespace KompasPlugin
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void OnDependencyParameterChanged(object sender, EventArgs e)
-        {
-            if (_isCheckDependencies) return;
-
-            _isCheckDependencies = true;
-            SetValueParameter(InnerRingDiameterTextBox, ToolTip,
-                ParameterTypes.InnerRingDiameter);
-            SetValueParameter(OuterRingDiameterTextBox, ToolTip,
-                ParameterTypes.OuterRingDiameter);
-            SetValueParameter(ThreadDiameterTextBox, ToolTip,
-                ParameterTypes.ThreadDiameter);
-            _isCheckDependencies = false;
-        }
+		{
+			if (!_isCheckDependencies)
+			{
+				_isCheckDependencies = true;
+				SetValueParameter(InnerRingDiameterTextBox, ToolTip,
+					Parameters.InnerRingDiameter);
+				SetValueParameter(OuterRingDiameterTextBox, ToolTip,
+					Parameters.OuterRingDiameter);
+				SetValueParameter(ThreadDiameterTextBox, ToolTip,
+					Parameters.ThreadDiameter);
+				_isCheckDependencies = false;
+			}
+		}
 
 		/// <summary>
 		/// Получить название неверного поля
 		/// </summary>
-		/// <param name="parameterType"></param>
+		/// <param name="parameter"></param>
 		/// <returns></returns>
-		private string GetNameLabel(ParameterTypes parameterType)
+		private string GetNameLabel(Parameters parameter)
 		{
-			return _labels[parameterType].Text;
+			return _labels[parameter].Text;
 		}
 
 		/// <summary>
@@ -108,29 +110,29 @@ namespace KompasPlugin
 		/// </summary>
 		/// <param name="textBox"><see cref="TextBox"/> из которого будет браться значение</param>
 		/// <param name="toolTip"><see cref="System.Windows.Forms.ToolTip"/> для показа ошибки</param>
-		/// <param name="parameterType">Параметр для записи</param>
-		private void SetValueParameter(TextBox textBox, ToolTip toolTip, ParameterTypes parameterType)
+		/// <param name="parameter">Параметр для записи</param>
+		private void SetValueParameter(TextBox textBox, ToolTip toolTip, Parameters parameter)
 		{
 			try
 			{
 				var value = Validator.GetValueFromString(textBox.Text);
-				_detailParameters.SetValue(parameterType, value);
-				if (_errors.ContainsKey(parameterType))
+				_detailParameters.SetValue(parameter, value);
+				if (_errors.ContainsKey(parameter))
 				{
-					_errors.Remove(parameterType);
+					_errors.Remove(parameter);
 				}
 			}
 			catch (ArgumentException exception)
 			{
 				textBox.BackColor = Color.MistyRose;
 				toolTip.Show(exception.Message, textBox);
-				if (!_errors.ContainsKey(parameterType))
+				if (!_errors.ContainsKey(parameter))
 				{
-					_errors.Add(parameterType, exception.Message);
+					_errors.Add(parameter, exception.Message);
 				}
 				else
 				{
-					_errors[parameterType] = exception.Message;
+					_errors[parameter] = exception.Message;
 				}
 
 				return;
@@ -139,16 +141,17 @@ namespace KompasPlugin
 			textBox.BackColor = Color.White;
 			toolTip.Hide(textBox);
 		}
-		
+
+		//TODO: xml комментарии
 		/// <summary>
-		/// Ищет <see cref="ParameterTypes"/> по имени <see cref="TextBox"/>
+		/// Ищет <see cref="Parameters"/> по имени <see cref="TextBox"/>
 		/// </summary>
-		/// <param name="textBoxName"></param>
+		/// <param name="textBox"></param>
 		/// <returns></returns>
-		private ParameterTypes FindParameters(string textBoxName)
+		private Parameters FindParameters(string textBoxName)
 		{
-			var parameters = Enum.GetValues(typeof(ParameterTypes))
-				.Cast<ParameterTypes>()
+			var parameters = Enum.GetValues(typeof(Parameters))
+				.Cast<Parameters>()
 				.ToList();
 			foreach (var parameter in parameters)
 			{
@@ -217,17 +220,6 @@ namespace KompasPlugin
 			{
 				ToolTip.Show(_errors[parameter], textBox);
 			}
-		}
-
-		 //TODO: XML(+)
-		 /// <summary>
-		 /// Обработчик события выбора типа отвертки.
-		 /// </summary>
-		 /// <param name="sender"></param>
-		 /// <param name="e"></param>
-		private void ScrewdriverTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			_detailParameters.ScrewdriverType = (ScrewdriverTypes)ScrewdriverTypeComboBox.SelectedIndex;
 		}
 	}
 }
