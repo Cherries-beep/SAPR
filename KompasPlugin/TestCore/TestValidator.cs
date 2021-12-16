@@ -19,8 +19,8 @@ namespace TestCore
 		/// Максимальное значение
 		/// </summary>
 		private const double MaxValue = 15.0;
-
-		//TODO: Убрать дубли.(+)
+		
+        //TODO: RSDN
 		[TestCase(10, TestName = "Проверка отправки корректного значения, входящего в диапазон")]
 		[TestCase(MinValue, TestName = "Проверка отправки корректного значения, равному минимальному значению")]
 		[TestCase(MaxValue, TestName = "Проверка отправки корректного значения, равному максимальному значению")]

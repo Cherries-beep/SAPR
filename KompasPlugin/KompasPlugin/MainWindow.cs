@@ -8,7 +8,6 @@ using Kompas;
 
 namespace KompasPlugin
 {
-	//TODO: naming (+)
     public partial class MainWindow : Form
     {
         /// <summary>
@@ -81,19 +80,18 @@ namespace KompasPlugin
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void OnDependencyParameterChanged(object sender, EventArgs e)
-		{
-			if (!_isCheckDependencies)
-			{
-				_isCheckDependencies = true;
-				SetValueParameter(InnerRingDiameterTextBox, ToolTip,
-					ParameterTypes.InnerRingDiameter);
-				SetValueParameter(OuterRingDiameterTextBox, ToolTip,
-					ParameterTypes.OuterRingDiameter);
-				SetValueParameter(ThreadDiameterTextBox, ToolTip,
-					ParameterTypes.ThreadDiameter);
-				_isCheckDependencies = false;
-			}
-		}
+        {
+            if (_isCheckDependencies) return;
+
+            _isCheckDependencies = true;
+            SetValueParameter(InnerRingDiameterTextBox, ToolTip,
+                ParameterTypes.InnerRingDiameter);
+            SetValueParameter(OuterRingDiameterTextBox, ToolTip,
+                ParameterTypes.OuterRingDiameter);
+            SetValueParameter(ThreadDiameterTextBox, ToolTip,
+                ParameterTypes.ThreadDiameter);
+            _isCheckDependencies = false;
+        }
 
 		/// <summary>
 		/// Получить название неверного поля
@@ -141,8 +139,7 @@ namespace KompasPlugin
 			textBox.BackColor = Color.White;
 			toolTip.Hide(textBox);
 		}
-
-		//TODO: xml комментарии(+)
+		
 		/// <summary>
 		/// Ищет <see cref="ParameterTypes"/> по имени <see cref="TextBox"/>
 		/// </summary>
@@ -222,6 +219,7 @@ namespace KompasPlugin
 			}
 		}
 
+		 //TODO: XML
 		private void ScrewdriverTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_detailParameters.ScrewdriverType = (ScrewdriverTypes)ScrewdriverTypeComboBox.SelectedIndex;

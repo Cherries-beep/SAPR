@@ -268,7 +268,6 @@ namespace Kompas
 				{
 					nextIndex = 0;
 				}
-                //TODO: rsdn (+)
 				document2D.ksLineSeg(points[i].X, points[i].Y,
 					points[nextIndex].X, points[nextIndex].Y, 1);
 			}
@@ -295,7 +294,6 @@ namespace Kompas
 			var deltaX = _detailParameters.GetValue(ParameterTypes.OuterRingDiameter) / 2;
 			document2D.ksLineSeg(x, y, x, y + deltaY, 1);
 			document2D.ksLineSeg(x, y + deltaY, deltaX, y + deltaY, 1);
-			//TODO: rsdn (+)
 			document2D.ksArcBy3Points(x, y, x - 0.1 * x,
 				y + deltaY / 2, deltaX, y + deltaY, 1);
 			sketchDefinition.EndEdit();

@@ -15,8 +15,7 @@ namespace TestCore
 		/// Возвращает новый экземпляр класса <see cref="Core.DetailParameters"/>
 		/// </summary>
 		private DetailParameters DetailParameters => new DetailParameters();
-
-		//TODO: Убрать дублирование тестов через TestCase-s (+)
+		
 		[TestCase(ParameterTypes.InnerRingDiameter, 4,
 			TestName = "Проверка корректного возврата у свойства InnerRingDiameter")]
 		[TestCase(ParameterTypes.OuterRingDiameter, 5,
