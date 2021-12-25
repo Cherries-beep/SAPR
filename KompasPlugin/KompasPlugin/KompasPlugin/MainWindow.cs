@@ -15,6 +15,7 @@ namespace KompasPlugin
         /// </summary>
 	    private readonly DetailParameters _detailParameters;
 
+		//TODO: RSDN
 		/// <summary>
 		/// Словарь ошибок
 		/// </summary>
@@ -218,8 +219,7 @@ namespace KompasPlugin
 				ToolTip.Show(_errors[parameter], textBox);
 			}
 		}
-
-		 //TODO: XML(+)
+		
 		 /// <summary>
 		 /// Обработчик события выбора типа отвертки.
 		 /// </summary>

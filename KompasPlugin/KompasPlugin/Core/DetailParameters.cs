@@ -16,6 +16,7 @@ namespace Core
 		/// </summary>
 		private const double Accuracy = 0.1;
 
+		//TODO: RSDN
 		/// <summary>
 		/// Словарь параметров
 		/// </summary>
