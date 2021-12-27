@@ -225,12 +225,17 @@ namespace Kompas
 		/// </summary>
 		/// <param name="point1"></param>
 		/// <param name="point2"></param>
-		private void CreateRectangle(Point point1, Point point2, ksDocument2D document2D)
+		private void CreateRectangle(Point point1,
+			Point point2, ksDocument2D document2D)
 		{
-			document2D.ksLineSeg(point1.X, -point1.Y, point2.X, -point1.Y, 1);
-			document2D.ksLineSeg(point2.X, -point1.Y, point2.X, -point2.Y, 1);
-			document2D.ksLineSeg(point1.X, -point2.Y, point2.X, -point2.Y, 1);
-			document2D.ksLineSeg(point1.X, -point1.Y, point1.X, -point2.Y, 1);
+			document2D.ksLineSeg(point1.X, -point1.Y,
+				point2.X, -point1.Y, 1);
+			document2D.ksLineSeg(point2.X, -point1.Y,
+				point2.X, -point2.Y, 1);
+			document2D.ksLineSeg(point1.X, -point2.Y,
+				point2.X, -point2.Y, 1);
+			document2D.ksLineSeg(point1.X, -point1.Y,
+				point1.X, -point2.Y, 1);
 		}
 
 		/// <summary>
@@ -240,8 +245,10 @@ namespace Kompas
 		private void CreateHexagonalHeadHole(ksPart part)
 		{
 			var plane = _kompasWrapper.CreatePlaneOffsetXoy(part, 
-				_detailParameters.GetValue(ParameterTypes.BoltBodyHeight) + 
-				_detailParameters.GetValue(ParameterTypes.BoltHeadHeight));
+				_detailParameters.GetValue(
+					ParameterTypes.BoltBodyHeight) + 
+				_detailParameters.GetValue(
+					ParameterTypes.BoltHeadHeight));
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);
 			ksSketchDefinition sketchDefinition = sketch.GetDefinition();
 			sketchDefinition.SetPlane(plane);
@@ -258,7 +265,8 @@ namespace Kompas
 			points.Add(new Point(x, y));
 			for (var i = 1; i <= 5; i++)
 			{
-				points.Add(new Point(radius * Math.Cos(i * angle), radius * Math.Sin(i * angle)));
+				points.Add(new Point(radius * Math.Cos(i * angle),
+					radius * Math.Sin(i * angle)));
 			}
 
 			for (var i = 0; i < points.Count; i++)
@@ -283,7 +291,8 @@ namespace Kompas
 		/// <param name="head"></param>
 		private void CreateHeadRounding(ksPart part, ksEntity head)
 		{
-			var sketch = _kompasWrapper.GetPlaneXozSketch(part, out var sketchDefinition);
+			var sketch = _kompasWrapper.GetPlaneXozSketch(part,
+				out var sketchDefinition);
 
 			// Входим в режим редактирования эскиза
 			ksDocument2D document2D = sketchDefinition.BeginEdit();

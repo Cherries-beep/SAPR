@@ -148,18 +148,22 @@ namespace TestCore
 				"Не удалось присвоить корректное значение");
 		}
 
-		[TestCase(TestName = "Проверка присвоения значения неизвестному элементу перечисления")]
+		[TestCase(TestName = "Проверка присвоения значения" +
+			" неизвестному элементу перечисления")]
 		public void TestSetValue_UnkownEnumerate()
 		{
 			var detailParameters = DetailParameters;
 
 			var value = 3.0;
 
-			Assert.Throws<KeyNotFoundException>(() => detailParameters.SetValue((ParameterTypes)15, value),
+			//TODO: RSDN(+)
+			Assert.Throws<KeyNotFoundException>(() => 
+			detailParameters.SetValue((ParameterTypes)15, value),
 				"Нашелся такой элемент перечисления!");
 		}
 
-		[TestCase(TestName = "Проверка корректного возврата у свойства ScrewdriverType")]
+		[TestCase(TestName = "Проверка корректного возврата" +
+			" у свойства ScrewdriverType")]
 		public void TestScrewdriverType_CorrectGet()
 		{
 			var detailParameters = DetailParameters;
@@ -170,10 +174,12 @@ namespace TestCore
 
 			var actual = detailParameters.ScrewdriverType;
 
-			Assert.AreEqual(expected, actual, "Возвращенное значение не равно ожидаемому");
+			Assert.AreEqual(expected, actual,
+				"Возвращенное значение не равно ожидаемому");
 		}
 
-		[TestCase(TestName = "Проверка корректного присвоения значения свойству ScrewdriverType")]
+		[TestCase(TestName = "Проверка корректного присвоения" +
+			" значения свойству ScrewdriverType")]
 		public void TestScrewdriverType_CorrectSet()
 		{
 			var detailParameters = DetailParameters;
@@ -195,7 +201,8 @@ namespace TestCore
 
 			detailParameters.SetValue(ParameterTypes.OuterRingDiameter, 5.0);
 
-			Assert.IsTrue(flag, $"Не сработало событие {nameof(detailParameters.DependencyParameterChanged)}");
+			Assert.IsTrue(flag, 
+				$"Не сработало событие {nameof(detailParameters.DependencyParameterChanged)}");
 		}
 	}
 }

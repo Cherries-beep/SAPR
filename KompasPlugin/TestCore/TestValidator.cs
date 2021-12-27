@@ -20,7 +20,6 @@ namespace TestCore
 		/// </summary>
 		private const double MaxValue = 15.0;
 		
-        //TODO: RSDN (+)
 		[TestCase(10, 
 			TestName = "Проверка отправки корректного значения, входящего в диапазон")]
 		[TestCase(MinValue,
@@ -42,8 +41,11 @@ namespace TestCore
 			TestName = "Проверка отправки значения больше максимального")]
 		public void TestValidate_BelowMinValue(double value)
 		{
-			Assert.Throws<ArgumentException>(() => Validator.Validate(value, MinValue, MaxValue),
-				$"Значение не должно входить в указанный диапазон. Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
+			//TODO: RSDN(+)
+			Assert.Throws<ArgumentException>(() => 
+					Validator.Validate(value, MinValue, MaxValue),
+				$"Значение не должно входить в указанный диапазон. " +
+				$"Значение — {value}; Диапазон — {MinValue} — {MaxValue}");
 		}
 
 		[TestCase(TestName = "Проверка правильного считывания значения из строки")]

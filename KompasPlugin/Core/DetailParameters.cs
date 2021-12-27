@@ -16,17 +16,25 @@ namespace Core
 		/// </summary>
 		private const double Accuracy = 0.1;
 
+		//TODO: RSDN (+)
 		/// <summary>
 		/// Словарь параметров
 		/// </summary>
-		private readonly Dictionary<ParameterTypes, Parameter> _parameters = new Dictionary<ParameterTypes, Parameter>
+		private readonly Dictionary<ParameterTypes, Parameter> _parameters = 
+			new Dictionary<ParameterTypes, Parameter>
 		{
-			{ ParameterTypes.BoltBodyHeight, new Parameter(10, 10, 20)},
-			{ ParameterTypes.BoltHeadHeight, new Parameter(2, 2, 4)},
-			{ ParameterTypes.InnerRingDiameter, new Parameter(4, 4, 7)},
-			{ ParameterTypes.ThreadDiameter, new Parameter(3.7, 3, 7)},
-			{ ParameterTypes.OuterRingDiameter, new Parameter(5, 5, 8)},
-			{ ParameterTypes.HeadDiameter, new Parameter(10, 10, 15)},
+			{ ParameterTypes.BoltBodyHeight,
+				new Parameter(10, 10, 20)},
+			{ ParameterTypes.BoltHeadHeight, 
+				new Parameter(2, 2, 4)},
+			{ ParameterTypes.InnerRingDiameter,
+				new Parameter(4, 4, 7)},
+			{ ParameterTypes.ThreadDiameter,
+				new Parameter(3.7, 3, 7)},
+			{ ParameterTypes.OuterRingDiameter,
+				new Parameter(5, 5, 8)},
+			{ ParameterTypes.HeadDiameter,
+				new Parameter(10, 10, 15)},
 		};
 
 		/// <summary>

@@ -31,7 +31,8 @@ namespace Core
 			set
 			{
 				_value = value;
-				Validator.Validate(_value, MinValue, MaxValue);
+				Validator.Validate(_value,
+					MinValue, MaxValue);
 			}
 		}
 
@@ -41,7 +42,8 @@ namespace Core
 		/// <param name="minValue"></param>
 		/// <param name="maxValue"></param>
 		/// <param name="value"></param>
-		public Parameter(double value, double minValue, double maxValue)
+		public Parameter(double value, 
+			double minValue, double maxValue)
 		{
 			MinValue = minValue;
 			MaxValue = maxValue;

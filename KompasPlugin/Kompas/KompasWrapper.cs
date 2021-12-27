@@ -26,7 +26,8 @@ namespace Kompas
 	    {
 		    if (KompasObject == null)
 		    {
-			    var kompasType = Type.GetTypeFromProgID("KOMPAS.Application.5");
+			    var kompasType = Type.GetTypeFromProgID(
+				    "KOMPAS.Application.5");
 			    KompasObject = (KompasObject)Activator.CreateInstance(kompasType);
 		    }
 
@@ -82,7 +83,8 @@ namespace Kompas
 		/// <param name="part"></param>
 		/// <param name="sketch"></param>
 		/// <param name="trajectory"></param>
-		public void CutTrajectoryEvolution(ksPart part, ksEntity sketch, ksEntity trajectory)
+		public void CutTrajectoryEvolution(ksPart part, 
+			ksEntity sketch, ksEntity trajectory)
 		{
 			ksEntity cinematicEvolition =
 				(ksEntity)part.NewEntity((short)Obj3dType.o3d_cutEvolution);
@@ -140,7 +142,8 @@ namespace Kompas
 		/// <param name="part"></param>
 		/// <param name="sketchDefinition"></param>
 		/// <returns></returns>
-		public ksEntity GetPlaneXozSketch(ksPart part, out ksSketchDefinition sketchDefinition)
+		public ksEntity GetPlaneXozSketch(ksPart part,
+			out ksSketchDefinition sketchDefinition)
 		{
 			ksEntity plane = part.GetDefaultEntity((int)Obj3dType.o3d_planeXOZ);
 			ksEntity sketch = part.NewEntity((int)Obj3dType.o3d_sketch);

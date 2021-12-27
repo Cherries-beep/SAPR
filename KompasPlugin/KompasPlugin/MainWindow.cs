@@ -15,10 +15,12 @@ namespace KompasPlugin
         /// </summary>
 	    private readonly DetailParameters _detailParameters;
 
+		//TODO: RSDN(+)
 		/// <summary>
 		/// Словарь ошибок
 		/// </summary>
-        private readonly Dictionary<ParameterTypes, string> _errors = new Dictionary<ParameterTypes, string>();
+        private readonly Dictionary<ParameterTypes, string> _errors =
+			new Dictionary<ParameterTypes, string>();
 
 		/// <summary>
 		/// Словарь <see cref="Label"/>
@@ -38,7 +40,8 @@ namespace KompasPlugin
             InitializeComponent();
             ShowIcon = false;
             _detailParameters = new DetailParameters();
-            _detailParameters.DependencyParameterChanged += OnDependencyParameterChanged;
+            _detailParameters.DependencyParameterChanged +=
+	            OnDependencyParameterChanged;
             SetDefaultParameter();
 
 			_labels = new Dictionary<ParameterTypes, Label>
@@ -106,10 +109,13 @@ namespace KompasPlugin
 		/// <summary>
 		/// Установить значение параметру детали
 		/// </summary>
-		/// <param name="textBox"><see cref="TextBox"/> из которого будет браться значение</param>
-		/// <param name="toolTip"><see cref="System.Windows.Forms.ToolTip"/> для показа ошибки</param>
+		/// <param name="textBox">
+		/// <see cref="TextBox"/> из которого будет браться значение</param>
+		/// <param name="toolTip">
+		/// <see cref="System.Windows.Forms.ToolTip"/> для показа ошибки</param>
 		/// <param name="parameterType">Параметр для записи</param>
-		private void SetValueParameter(TextBox textBox, ToolTip toolTip, ParameterTypes parameterType)
+		private void SetValueParameter(TextBox textBox, ToolTip toolTip, 
+			ParameterTypes parameterType)
 		{
 			try
 			{
@@ -176,7 +182,8 @@ namespace KompasPlugin
 			        message += GetNameLabel(error.Key) + error.Value + '\n';
 		        }
 
-		        MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		        MessageBox.Show(message, "Ошибка",
+			        MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 	        }
 
@@ -196,7 +203,8 @@ namespace KompasPlugin
 				return;
 			}
 			
-			SetValueParameter(textBox, ToolTip, FindParameters(textBox.Name));
+			SetValueParameter(textBox, ToolTip, 
+				FindParameters(textBox.Name));
 		}
 
 		/// <summary>
@@ -218,8 +226,7 @@ namespace KompasPlugin
 				ToolTip.Show(_errors[parameter], textBox);
 			}
 		}
-
-		 //TODO: XML(+)
+		
 		 /// <summary>
 		 /// Обработчик события выбора типа отвертки.
 		 /// </summary>
@@ -227,7 +234,8 @@ namespace KompasPlugin
 		 /// <param name="e"></param>
 		private void ScrewdriverTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			_detailParameters.ScrewdriverType = (ScrewdriverTypes)ScrewdriverTypeComboBox.SelectedIndex;
+			_detailParameters.ScrewdriverType = 
+				(ScrewdriverTypes)ScrewdriverTypeComboBox.SelectedIndex;
 		}
 	}
 }
