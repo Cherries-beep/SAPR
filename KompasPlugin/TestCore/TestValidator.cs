@@ -41,7 +41,6 @@ namespace TestCore
 			TestName = "Проверка отправки значения больше максимального")]
 		public void TestValidate_BelowMinValue(double value)
 		{
-			//TODO: RSDN(+)
 			Assert.Throws<ArgumentException>(() => 
 					Validator.Validate(value, MinValue, MaxValue),
 				$"Значение не должно входить в указанный диапазон. " +

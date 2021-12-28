@@ -38,7 +38,6 @@ namespace Core
 
 			if (!double.TryParse(valueString, out var value))
 			{
-				//TODO: RSDN(+)
 				throw new ArgumentException(
 					"Введено некорректное значение." +
 					" Нужно ввести либо целое число, либо число с плавающей точкой");

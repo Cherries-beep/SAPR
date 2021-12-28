@@ -14,8 +14,7 @@ namespace KompasPlugin
         /// Параметры болта с внутренней резьбой
         /// </summary>
 	    private readonly DetailParameters _detailParameters;
-
-		//TODO: RSDN(+)
+		
 		/// <summary>
 		/// Словарь ошибок
 		/// </summary>

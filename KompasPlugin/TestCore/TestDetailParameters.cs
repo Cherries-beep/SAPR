@@ -155,8 +155,7 @@ namespace TestCore
 			var detailParameters = DetailParameters;
 
 			var value = 3.0;
-
-			//TODO: RSDN(+)
+			
 			Assert.Throws<KeyNotFoundException>(() => 
 			detailParameters.SetValue((ParameterTypes)15, value),
 				"Нашелся такой элемент перечисления!");
